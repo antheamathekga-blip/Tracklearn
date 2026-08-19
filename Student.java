@@ -12,4 +12,17 @@ public class Student {
     public String toString() {
         return "Student: " + name + " | Activity: " + activity + " | Hours: " + hours;
     }
+
+    // Getters needed for saving to file
+    public String getName() { 
+        return name; 
+    }
+    
+    public String getActivity() { 
+        return activity; 
+    }
+    
+    public double getHours() { 
+        return hours; 
+    }
 }
