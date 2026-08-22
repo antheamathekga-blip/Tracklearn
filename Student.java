@@ -1,28 +1,28 @@
 public class Student {
-    private String name;
-    private String activity;
-    private double hours;
-
-    public Student(String name, String activity, double hours) {
-        this.name = name;
-        this.activity = activity;
-        this.hours = hours;
-    }
-
-    public String toString() {
-        return "Student: " + name + " | Activity: " + activity + " | Hours: " + hours;
-    }
-
-    // Getters needed for saving to file
-    public String getName() { 
-        return name; 
-    }
-    
-    public String getActivity() { 
-        return activity; 
-    }
-    
-    public double getHours() { 
-        return hours; 
-    }
+  private String id;
+  private String name;
+  private int attendance;
+  private double averageMark;
+  private String riskStatus;
+  public Student(String id, String name, int attendance, double averageMark){
+   this.id = id;
+   this.name = name;
+   this.attendance = attendance;
+   this.averageMark = averageMark;
+   }
+   public String getId(){
+   return id;
+   }
+   public int getAttendance(){
+   return attendance;
+  }
+  public double getAverageMark(){
+  return averageMark;
+  }
+  public String getRiskStatus() {
+  return riskStatus;
+  }
+  public void setRiskStatus(String riskStatus) {
+ this.riskStatus = riskStatus;
+}
 }
