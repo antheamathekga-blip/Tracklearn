@@ -5,112 +5,88 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>TrackLearn LMS</title>
 <style>
-*{margin:0;padding:0;box-sizing:border-box;font-family:Inter,Segoe UI,sans-serif}
-body{background:#FFFFFF;width:100%;height:100vh;overflow:hidden}
-.topbar{background:#FFFFFF;padding:14px 20px;display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid #E5E7EB}
-.logo{display:flex;align-items:center;gap:8px;color:#111827;font-weight:700;font-size:18px}
-.logo-icon{color:#EA580C;font-size:20px}
-.top-icons{display:flex;gap:16px;align-items:center;color:#6B7280}
-.container{display:flex;height:calc(100vh - 61px)}
-.sidebar{width:200px;background:#FFFFFF;padding:16px 12px;border-right:1px solid #E5E7EB}
+*{margin:0;padding:0;box-sizing:border-box;font-family:Inter,sans-serif}
+html,body{width:100%;height:100%;background:#FFFFFF}
+.topbar{width:100%;background:#FFF;padding:14px 22px;display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid #E5E7EB}
+.logo{font-weight:700;display:flex;gap:8px;color:#111827}
+.logo-icon{color:#EA580C}
+.container{display:flex;width:100%;height:calc(100% - 54px)}
+.sidebar{width:200px;background:#FFF;border-right:1px solid #E5E7EB;padding:12px}
 .side-item{padding:11px 12px;border-radius:8px;margin-bottom:4px;color:#4B5563;font-size:14px;display:flex;gap:10px;align-items:center;cursor:pointer}
 .side-item.active{background:#FFEDD5;color:#EA580C;font-weight:600}
-.main{flex:1;padding:24px;background:#FFFFFF;overflow-y:auto;position:relative}
-.stats-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
-.stat{background:#FFFFFF;border:1px solid #E5E7EB;border-radius:12px;padding:16px}
-.stat-top{display:flex;align-items:center;gap:8px;font-size:12px;color:#6B7280}
-.stat-icon{width:24px;height:24px;background:#FFEDD5;color:#EA580C;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:12px}
-.stat h1{font-size:30px;margin:10px 0 4px}
-.popup-wrap{position:fixed;left:0;top:0;width:100%;height:100%;background:rgba(0,0,0,0.3);display:flex;align-items:center;justify-content:center;z-index:999}
-.popup{background:#FFFFFF;border-radius:14px;padding:20px;width:320px;text-align:center;box-shadow:0 20px 40px rgba(0,0,0,0.2)}
-.btn-orange{background:#EA580C;color:white;border:none;width:100%;padding:11px;border-radius:8px;font-weight:600;cursor:pointer}
-.login-screen{position:fixed;left:0;top:0;width:100%;height:100%;background:#FFFFFF;display:flex;align-items:center;justify-content:center;z-index:2000}
-.login-box{background:#FFFFFF;border:1px solid #E5E7EB;border-radius:16px;padding:30px;width:360px;text-align:center;box-shadow:0 10px 30px rgba(0,0,0,0.08)}
-.login-box input{width:100%;padding:11px;border:1px solid #E5E7EB;border-radius:8px;margin:8px 0}
+.main{flex:1;background:#FFF;padding:22px;overflow-y:auto}
+.stat-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+.stat{background:#FFF;border:1px solid #E5E7EB;border-radius:10px;padding:14px}
+.popup-wrap{position:fixed;inset:0;background:rgba(0,0,0,0.25);display:flex;align-items:center;justify-content:center;z-index:999}
+.popup{background:#FFF;border-radius:12px;padding:18px;width:300px;text-align:center;box-shadow:0 10px 30px rgba(0,0,0,0.2)}
+.btn-orange{background:#EA580C;color:#FFF;border:none;padding:10px 16px;border-radius:8px;cursor:pointer;font-weight:600}
 .hidden{display:none!important}
+.login{position:fixed;inset:0;background:#FFF;z-index:2000;display:flex;align-items:center;justify-content:center}
+.login-box{border:1px solid #E5E7EB;border-radius:12px;padding:26px;width:330px;text-align:center}
+.login-box input{width:100%;padding:10px;border:1px solid #E5E7EB;border-radius:8px;margin:6px 0}
 </style>
 </head>
 <body>
-
-<!-- LOGIN - POPUP LOGIC STARTS HERE -->
-<div class="login-screen" id="loginScreen">
+<div class="login" id="loginScreen">
 <div class="login-box">
-<div style="font-size:22px;font-weight:700;margin-bottom:6px;color:#EA580C">📖 TrackLearn LMS</div>
-<p style="color:#6B7280;font-size:14px;margin-bottom:20px">Login to continue</p>
-<input id="username" placeholder="Enter name: e.g Banele / John">
-<input id="role" placeholder="Role: learner or admin" value="learner">
-<button class="btn-orange" style="margin-top:12px" onclick="login()">Login</button>
-<p style="font-size:11px;color:#9CA3AF;margin-top:12px">Try: Banele (behind) or Siviwe (on track) or John (admin)</p>
+<div style="color:#EA580C;font-weight:700;font-size:20px;margin-bottom:8px">📖 TrackLearn LMS</div>
+<input id="username" placeholder="Name: Banele / John">
+<input id="role" placeholder="learner or admin" value="learner">
+<button class="btn-orange" style="width:100%;margin-top:10px" onclick="login()">Login</button>
 </div>
 </div>
-
-<div class="topbar">
-<div class="logo"><span class="logo-icon">📖</span> TrackLearn LMS</div>
-<div class="top-icons"><span>🔍</span><span>🔔</span><span id="userLabel"></span></div>
-</div>
-
+<div class="topbar"><div class="logo"><span class="logo-icon">📖</span> TrackLearn LMS</div><div>🔍 🔔 JS</div></div>
 <div class="container">
 <div class="sidebar">
-<div class="side-item active">🏠 Dashboard</div>
-<div class="side-item">👥 Students</div>
-<div class="side-item">📚 Courses</div>
-<div class="side-item">📊 Analytics</div>
+<div class="side-item active" onclick="openTab('dashboard',this)">🏠 Dashboard</div>
+<div class="side-item" onclick="openTab('students',this)">👥 Students</div>
+<div class="side-item" onclick="openTab('courses',this)">📚 Courses</div>
+<div class="side-item" onclick="openTab('analytics',this)">📊 Analytics</div>
+<div class="side-item" onclick="openTab('settings',this)">⚙️ Settings</div>
+<div class="side-item" onclick="openTab('help',this)">❓ Help</div>
 <div class="side-item" onclick="logout()">🚪 Logout</div>
 </div>
-<div class="main">
-<h2 id="welcomeText">Dashboard</h2>
-<p style="color:#6B7280;font-size:14px;margin:6px 0 20px">Welcome back</p>
-<div class="stats-grid">
-<div class="stat"><div class="stat-top"><span class="stat-icon">👥</span> Total Students</div><h1>128</h1></div>
-<div class="stat"><div class="stat-top"><span class="stat-icon">📚</span> Active Courses</div><h1>12</h1></div>
-<div class="stat"><div class="stat-top"><span class="stat-icon">📈</span> Completion Rate</div><h1>76%</h1></div>
-<div class="stat"><div class="stat-top"><span class="stat-icon">⭐</span> Avg Score</div><h1>84%</h1></div>
+<div class="main" id="main"></div>
 </div>
-</div>
-</div>
-
-<!-- POPUP - HIDDEN BY DEFAULT, ONLY SHOWS FOR LEARNER -->
 <div class="popup-wrap hidden" id="popup">
 <div class="popup">
-<div style="width:36px;height:36px;background:#FEF3C7;border-radius:50%;margin:0 auto 12px;display:flex;align-items:center;justify-content:center">⚠️</div>
-<h4 id="popupTitle">You're Falling Behind</h4>
-<p style="font-size:12px;color:#6B7280;margin:10px 0 14px" id="popupMsg">You're 30% behind in Business Analytics.</p>
-<button class="btn-orange" onclick="dismissPopup()">Continue Learning →</button>
-<div style="font-size:12px;color:#9CA3AF;margin-top:10px;cursor:pointer" onclick="dismissPopup()">Dismiss for now</div>
+<div style="width:32px;height:32px;background:#FEF3C7;border-radius:50%;margin:0 auto 10px;display:flex;align-items:center;justify-content:center">⚠️</div>
+<h4>You're Falling Behind</h4>
+<p id="popupMsg" style="font-size:11px;color:#6B7280;margin:8px 0 12px">You're 30% behind in Business Analytics.</p>
+<button class="btn-orange" style="width:100%" onclick="dismissPopup()">Continue Learning →</button>
+<div style="font-size:11px;color:#9CA3AF;margin-top:8px;cursor:pointer" onclick="dismissPopup()">Dismiss for now</div>
 </div>
 </div>
-
 <script>
-let learners = {
-  "banele": {progress:30, status:"behind"},
-  "osamar": {progress:45, status:"behind"},
-  "siviwe": {progress:85, status:"ontrack"},
-  "anthea": {progress:76, status:"ontrack"}
-}
-
+let learners=[{name:'banele',p:30,s:'behind'},{name:'osamar',p:45,s:'behind'},{name:'siviwe',p:85,s:'ontrack'},{name:'anthea',p:76,s:'ontrack'}];
+let currentUser='';
 function login(){
-  let name = document.getElementById('username').value.toLowerCase().trim();
-  let role = document.getElementById('role').value.toLowerCase().trim();
-  if(!name){alert('Enter name');return}
-
-  document.getElementById('loginScreen').classList.add('hidden');
-  document.getElementById('userLabel').innerText = name;
-  document.getElementById('welcomeText').innerText = 'Welcome, ' + name;
-
-  // POPUP LOGIC: ONLY IF LEARNER LOGS IN
-  if(role === 'learner'){
-    let data = learners[name] || {progress:30, status:"behind"};
-    if(data.status === 'behind'){
-      document.getElementById('popupMsg').innerText = "You're "+data.progress+"% behind in Business Analytics. Catch up now to stay on track for your goal.";
-      // Show after 1 sec like real login
-      setTimeout(()=>{document.getElementById('popup').classList.remove('hidden')}, 800);
-    }
-  }
-  // If admin, popup never shows
+let n=document.getElementById('username').value.trim().toLowerCase();
+let r=document.getElementById('role').value.trim().toLowerCase();
+if(!n)return alert('Enter name');
+currentUser=n;
+document.getElementById('loginScreen').classList.add('hidden');
+openTab('dashboard',document.querySelector('.side-item'));
+if(r==='learner'){
+let me=learners.find(l=>l.name===n)||{p:30,s:'behind'};
+if(me.s==='behind'){
+document.getElementById('popupMsg').innerText=`You're ${me.p}% behind in Business Analytics. Catch up now.`;
+setTimeout(()=>document.getElementById('popup').classList.remove('hidden'),500);
 }
-
+}
+}
 function dismissPopup(){document.getElementById('popup').classList.add('hidden')}
 function logout(){document.getElementById('loginScreen').classList.remove('hidden');document.getElementById('popup').classList.add('hidden')}
+function openTab(tab,el){
+if(el){document.querySelectorAll('.side-item').forEach(i=>i.classList.remove('active'));el.classList.add('active')}
+let m=document.getElementById('main');
+if(tab==='dashboard'){m.innerHTML=`<h3>Dashboard</h3><p style="font-size:13px;color:#6B7280;margin:6px 0 14px">Welcome back, ${currentUser}</p><div class="stat-grid"><div class="stat"><small>Total Students</small><h2>128</h2></div><div class="stat"><small>Active Courses</small><h2>12</h2></div><div class="stat"><small>Completion</small><h2>76%</h2></div><div class="stat"><small>Avg Score</small><h2>84%</h2></div></div><div style="margin-top:14px;border:1px solid #E5E7EB;border-radius:10px;padding:14px;background:#F9FAFB">Student Overview - Click Students tab</div>`}
+if(tab==='students'){m.innerHTML=`<h3>Students</h3><div style="margin-top:12px"><div class="stat" style="display:flex;justify-content:space-between;margin-bottom:8px"><span>Banele - 30%</span><span style="color:red">behind</span><button class="btn-orange" onclick="alert('Email sent')">Email</button></div><div class="stat" style="display:flex;justify-content:space-between;margin-bottom:8px"><span>Siviwe - 85%</span><span style="color:green">ontrack</span><button class="btn-orange" onclick="alert('Email sent')">Email</button></div></div>`}
+if(tab==='courses'){m.innerHTML=`<h3>Courses</h3><div class="stat" style="margin-top:12px"><b>Business Analytics</b><br><button class="btn-orange" style="margin-top:8px" onclick="alert('Opening...')">Open</button></div>`}
+if(tab==='analytics'){m.innerHTML=`<h3>Analytics</h3><div class="stat" style="margin-top:12px">76% completion<br><button class="btn-orange" style="margin-top:8px" onclick="alert('Downloading...')">Download Report</button></div>`}
+if(tab==='settings'){m.innerHTML=`<h3>Settings</h3><div class="stat" style="margin-top:12px">Supabase Connected<br><button class="btn-orange" style="margin-top:8px" onclick="alert('Saved')">Save</button></div>`}
+if(tab==='help'){m.innerHTML=`<h3>Help</h3><div class="stat" style="margin-top:12px">support@tracklearn.com<br><button class="btn-orange" style="margin-top:8px" onclick="alert('Docs')">Open Docs</button></div>`}
+}
 </script>
 </body>
 </html>
