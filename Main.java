@@ -1,64 +1,55 @@
 import java.util.*;
-import java.io.*;
 
 public class Main {
     public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
-        List<Student> students = loadStudents(); // Load data from file on startup
+        Scanner sc = new Scanner(System.in);
         
-        System.out.println("==================================");
-        System.out.println(" TrackLearn - LMS Activity Tracker");
-        System.out.println("==================================");
-        
-        while (true) {
-            System.out.print("\nEnter student name or 'exit': ");
-            String name = scanner.nextLine();
-            if (name.equalsIgnoreCase("exit")) break;
-            
-            System.out.print("Enter activity: ");
-            String activity = scanner.nextLine();
-            
-            System.out.print("Enter hours studied: ");
-            double hours = scanner.nextDouble();
-            scanner.nextLine(); // clear the enter key
-            
-            students.add(new Student(name, activity, hours));
-            saveStudents(students); // Save to file after each new student
-            System.out.println("Student added and saved!");
+        System.out.println("=== TrackLearn LMS Login ===");
+        System.out.print("Email: ");
+        String email = sc.nextLine();
+        System.out.print("Password: ");
+        String pass = sc.nextLine();
+
+        AuthService auth = new AuthService();
+        User user = auth.login(email, pass);
+
+        if (user == null) {
+            System.out.println("Login failed! Try anthea@tracklearn.com / 123456");
+            return;
         }
-        
-        System.out.println("\n--- All Students ---");
-        for (Student s : students) {
-            System.out.println(s);
-        }
-        System.out.println("Data saved to students.txt");
-        scanner.close();
-    }
-    
-    // Save all students to students.txt
-    public static void saveStudents(List<Student> students) {
-        try (PrintWriter writer = new PrintWriter(new FileWriter("students.txt"))) {
-            for (Student s : students) {
-                writer.println(s.getName() + "," + s.getActivity() + "," + s.getHours());
+
+        System.out.println("\nWelcome " + user.name + " | Role: " + user.role);
+
+        if (user.role.equals("facilitator")) {
+            // FACILITATOR - CLEAN DASHBOARD (Your new Figma, NO POPUP)
+            DatabaseService db = new DatabaseService();
+            List<Student> all = db.getAllLearners();
+
+            System.out.println("\n--- DASHBOARD ---");
+            System.out.println("128 Students | 12 Courses | 76% Complete | 84% Avg Score");
+            System.out.println("\nAll Learners:");
+            for (Student s : all) {
+                System.out.println(s.name + " | " + s.course + " | " + s.progress + "% | " + (s.isBehind() ? "BEHIND" : "ON TRACK"));
             }
-        } catch (IOException e) {
-            System.out.println("Error saving file: " + e.getMessage());
-        }
-    }
-    
-    // Load students from students.txt
-    public static List<Student> loadStudents() {
-        List<Student> students = new ArrayList<>();
-        try (Scanner fileScanner = new Scanner(new File("students.txt"))) {
-            while (fileScanner.hasNextLine()) {
-                String[] data = fileScanner.nextLine().split(",");
-                if (data.length == 3) {
-                    students.add(new Student(data[0], data[1], Double.parseDouble(data[2])));
-                }
+
+            // Email requirement
+            EmailService emailService = new EmailService();
+            emailService.sendBehindReport(all);
+
+        } else {
+            // LEARNER - POPUP ONLY IF BEHIND
+            Student me = new DatabaseService().getLearnerByEmail(email);
+            System.out.println("\n--- MY LEARNING ---");
+            System.out.println("Course: " + me.course);
+            System.out.println("Progress: " + me.progress + "%");
+
+            if (me.isBehind()) {
+                System.out.println("\n[ POPUP ] You're Falling Behind!");
+                System.out.println("You're " + (100 - me.progress) + "% behind in " + me.course + ". Catch up now!");
+                System.out.println("[ Continue Learning > ]");
+            } else {
+                System.out.println("You are on track! No popup - clean dashboard.");
             }
-        } catch (FileNotFoundException e) {
-            // File doesn't exist yet on first run - that's fine
         }
-        return students;
     }
 }
