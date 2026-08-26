@@ -3,8 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>TrackLearn LMS - Production Final</title>
-<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+<title>TrackLearn LMS - 8 IT Courses</title>
 <style>
 *{margin:0;padding:0;box-sizing:border-box;font-family:Inter,Arial,sans-serif}
 body{background:#fff}
@@ -26,30 +25,55 @@ td{padding:10px;border-bottom:1px solid #F3F4F6}
 .behind{background:#FEE2E2;color:#DC2626}
 .ontrack{background:#D1FAE5;color:#059669}
 .atrisk{background:#FEF3C7;color:#D97706}
-.search{width:100%;padding:10px;border:1px solid #E5E7EB;border-radius:8px;margin-bottom:12px}
+.search, select, input[type=text]{width:100%;padding:10px;border:1px solid #E5E7EB;border-radius:8px;margin-bottom:10px}
+select{cursor:pointer;background:#fff}
+.checkboxGroup{display:flex;flex-wrap:wrap;gap:10px;margin:10px 0}
+.checkboxGroup label{display:flex;align-items:center;gap:6px;font-size:13px;background:#F9FAFB;padding:6px 10px;border-radius:20px;border:1px solid #E5E7EB;cursor:pointer}
+.checkboxGroup input[type=checkbox]{width:16px;height:16px}
 .ok{margin-top:8px;padding:8px;background:#ECFDF5;border:1px solid #10B981;border-radius:6px;font-size:12px;display:none}
 .ok.show{display:block}
 #popup{position:fixed;inset:0;background:rgba(0,0,0,.4);display:none;align-items:center;justify-content:center;z-index:9999}
 #popup.show{display:flex}
 #login{position:fixed;inset:0;background:#fff;z-index:10000;display:flex;align-items:center;justify-content:center}
 .popupBox{background:#fff;padding:22px;border-radius:16px;width:360px;text-align:center;box-shadow:0 20px 50px rgba(0,0,0,.3)}
+.courseGrid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
 </style>
 </head>
 <body>
 
-<div id="login"><div style="border:1px solid #E5E7EB;padding:24px;border-radius:16px;width:360px;text-align:center"><div style="color:#EA580C;font-weight:800;font-size:20px">📖 TrackLearn LMS</div><p style="font-size:12px;color:#6B7280;margin:8px 0">Production - 30 Students, 10 Courses, 8 Workers</p><input id="n" style="width:100%;padding:10px;border:1px solid #E5E7EB;border-radius:8px" placeholder="Name: Banele, Siviwe, John..."><select id="r" style="width:100%;padding:10px;margin-top:8px;border:1px solid #E5E7EB;border-radius:8px"><option value="learner">Learner / Student</option><option value="admin">Admin</option><option value="instructor">Worker / Instructor</option></select><button style="width:100%;margin-top:12px;padding:10px" onclick="LOGIN()">Login</button></div></div>
+<div id="login"><div style="border:1px solid #E5E7EB;padding:24px;border-radius:16px;width:380px;text-align:center"><div style="color:#EA580C;font-weight:800;font-size:20px">📖 TrackLearn LMS</div><p style="font-size:12px;color:#6B7280;margin:8px 0">8 IT Courses | 8 Students</p>
+<!-- DROPDOWN FOR STUDENTS -->
+<label style="font-size:12px;text-align:left;display:block;margin-bottom:4px">Select Student (Dropdown)</label>
+<select id="n" onchange="autoFill()">
+<option value="">-- Choose Student --</option>
+<option value="Banele Nkosi">Banele Nkosi - 30% Behind</option>
+<option value="Siviwe Dlamini">Siviwe Dlamini - 85% On Track</option>
+<option value="Anthea Mathekga">Anthea Mathekga - 76% On Track</option>
+<option value="John Smith">John Smith - 92% On Track</option>
+<option value="Lerato Molefe">Lerato Molefe - 28% Behind</option>
+<option value="David Lee">David Lee - 88% On Track</option>
+<option value="Priya Patel">Priya Patel - 95% On Track</option>
+<option value="Kagiso Rabada">Kagiso Rabada - 22% Behind</option>
+</select>
+<label style="font-size:12px;text-align:left;display:block;margin:8px 0 4px">Role (Dropdown)</label>
+<select id="r"><option value="learner">Learner / Student</option><option value="admin">Admin</option><option value="instructor">Worker / Instructor</option></select>
+<label style="font-size:12px;text-align:left;display:block;margin:8px 0 4px">IT Course (Dropdown)</label>
+<select id="courseSelect"><option>Web Development</option><option>Data Science</option><option>Cybersecurity</option><option>Cloud Computing</option><option>Artificial Intelligence</option><option>Software Engineering</option><option>Network Administration</option><option>Database Management</option></select>
+<div style="text-align:left;margin-top:10px"><label style="font-size:12px">Learning Modules (Checkbox)</label><div class="checkboxGroup"><label><input type="checkbox" checked> Videos</label><label><input type="checkbox" checked> Quizzes</label><label><input type="checkbox"> Assignments</label><label><input type="checkbox"> Projects</label></div></div>
+<button style="width:100%;margin-top:12px;padding:10px" onclick="LOGIN()">Login to LMS</button>
+</div></div>
 
-<div class="top"><b>📖 TrackLearn LMS</b><span id="who" style="font-size:13px;color:#6B7280"></span></div>
+<div class="top"><b>📖 TrackLearn LMS - 8 IT Courses</b><span id="who" style="font-size:13px;color:#6B7280"></span></div>
 
 <div class="flex">
 <div class="side">
 <div id="s1" class="active" onclick="DASH()">🏠 Dashboard</div>
-<div id="s2" onclick="STUD()">👥 Students (30)</div>
-<div id="s3" onclick="COUR()">📚 Courses (10)</div>
-<div id="s4" onclick="WORK()">👷 Workers (8)</div>
+<div id="s2" onclick="STUD()">👥 Students (8)</div>
+<div id="s3" onclick="COUR()">💻 IT Courses (8)</div>
+<div id="s4" onclick="WORK()">👷 Workers (4)</div>
 <div id="s5" onclick="ANAL()">📊 Analytics</div>
-<div id="s6" onclick="SETT()">⚙️ Settings</div>
-<div id="s7" onclick="HELP()">❓ Help</div>
+<div id="s6" onclick="ENROLL()">📝 Enroll</div>
+<div id="s7" onclick="SETT()">⚙️ Settings</div>
 <div onclick="location.reload()">🚪 Logout</div>
 </div>
 <div class="main" id="M"></div>
@@ -58,106 +82,58 @@ td{padding:10px;border-bottom:1px solid #F3F4F6}
 <div id="popup"><div class="popupBox" id="popupBox"></div></div>
 
 <script>
-// === DATA - MANY STUDENTS, COURSES, WORKERS ===
 const students=[
-{name:'Banele Nkosi',email:'banele@test.com',course:'Business Analytics',progress:30,status:'behind',last:'2h ago'},
-{name:'Osamar Johnson',email:'osamar@test.com',course:'Data Science 101',progress:45,status:'behind',last:'5h ago'},
-{name:'Lerato Molefe',email:'lerato@test.com',course:'Data Science 101',progress:28,status:'behind',last:'1d ago'},
-{name:'Kagiso Rabada',email:'kagiso@test.com',course:'Data Science 101',progress:22,status:'behind',last:'2d ago'},
-{name:'Sipho Zulu',email:'sipho@test.com',course:'Data Science 101',progress:35,status:'behind',last:'1d ago'},
-{name:'Mike Chen',email:'mike@test.com',course:'Business Analytics',progress:40,status:'behind',last:'12h ago'},
-{name:'Thandi Nkosi',email:'thandi@test.com',course:'Marketing',progress:25,status:'behind',last:'1d ago'},
-{name:'Peter Moyo',email:'peter@test.com',course:'UX Design',progress:32,status:'behind',last:'3d ago'},
-{name:'Siviwe Dlamini',email:'siviwe@test.com',course:'Business Analytics',progress:85,status:'ontrack',last:'now'},
-{name:'Anthea Mathekga',email:'anthea@test.com',course:'Marketing',progress:76,status:'ontrack',last:'1h ago'},
-{name:'John Smith',email:'john@test.com',course:'Business Analytics',progress:92,status:'ontrack',last:'now'},
-{name:'David Lee',email:'david@test.com',course:'Data Science 101',progress:88,status:'ontrack',last:'now'},
-{name:'Priya Patel',email:'priya@test.com',course:'UX Design',progress:95,status:'ontrack',last:'now'},
-{name:'Sarah Williams',email:'sarah@test.com',course:'Marketing',progress:73,status:'ontrack',last:'2h ago'},
-{name:'Zanele Mthembu',email:'zanele@test.com',course:'UX Design',progress:81,status:'ontrack',last:'4h ago'},
-{name:'Fatima Ali',email:'fatima@test.com',course:'Marketing',progress:90,status:'ontrack',last:'now'},
-{name:'Emily Davis',email:'emily@test.com',course:'UX Design',progress:78,status:'ontrack',last:'5h ago'},
-{name:'Grace Naidoo',email:'grace@test.com',course:'Marketing',progress:89,status:'ontrack',last:'now'},
-{name:'Chris Evans',email:'chris@test.com',course:'Leadership',progress:94,status:'ontrack',last:'now'},
-{name:'Naledi Pandor',email:'naledi@test.com',course:'Finance',progress:87,status:'ontrack',last:'2h ago'},
-{name:'Thabo Mbeki',email:'thabo@test.com',course:'Marketing',progress:67,status:'atrisk',last:'3h ago'},
-{name:'Nomsa Khumalo',email:'nomsa@test.com',course:'Business Analytics',progress:55,status:'atrisk',last:'6h ago'},
-{name:'James Brown',email:'james@test.com',course:'Business Analytics',progress:60,status:'atrisk',last:'8h ago'},
-{name:'Mandla Ndlovu',email:'mandla@test.com',course:'Business Analytics',progress:50,status:'atrisk',last:'9h ago'},
-{name:'Amanda Botha',email:'amanda@test.com',course:'Project Mgmt',progress:58,status:'atrisk',last:'7h ago'},
-{name:'Robert Jones',email:'robert@test.com',course:'Finance',progress:62,status:'atrisk',last:'5h ago'},
-{name:'Lisa Green',email:'lisa@test.com',course:'Digital Marketing',progress:64,status:'atrisk',last:'4h ago'},
-{name:'Ahmed Hassan',email:'ahmed@test.com',course:'Business Analytics',progress:52,status:'atrisk',last:'10h ago'},
-{name:'Julia Roberts',email:'julia@test.com',course:'UX Design',progress:69,status:'atrisk',last:'3h ago'},
-{name:'Samuel Doe',email:'samuel@test.com',course:'Data Science 101',progress:57,status:'atrisk',last:'6h ago'}
+{name:'Banele Nkosi',email:'banele@test.com',course:'Web Development',progress:30,status:'behind',modules:['Videos','Quizzes']},
+{name:'Siviwe Dlamini',email:'siviwe@test.com',course:'Data Science',progress:85,status:'ontrack',modules:['Videos','Quizzes','Projects']},
+{name:'Anthea Mathekga',email:'anthea@test.com',course:'Cybersecurity',progress:76,status:'ontrack',modules:['Videos','Assignments']},
+{name:'John Smith',email:'john@test.com',course:'Cloud Computing',progress:92,status:'ontrack',modules:['Videos','Quizzes','Assignments','Projects']},
+{name:'Lerato Molefe',email:'lerato@test.com',course:'Artificial Intelligence',progress:28,status:'behind',modules:['Videos']},
+{name:'David Lee',email:'david@test.com',course:'Software Engineering',progress:88,status:'ontrack',modules:['Videos','Projects']},
+{name:'Priya Patel',email:'priya@test.com',course:'Network Administration',progress:95,status:'ontrack',modules:['Videos','Quizzes','Assignments','Projects']},
+{name:'Kagiso Rabada',email:'kagiso@test.com',course:'Database Management',progress:22,status:'behind',modules:['Videos']}
 ];
 const courses=[
-{title:'Business Analytics',students:65,instructor:'Dr. James Wilson',completion:'76%'},
-{title:'Data Science 101',students:42,instructor:'Prof. Sarah Chen',completion:'68%'},
-{title:'Marketing Fundamentals',students:38,instructor:'Anthea Mathekga',completion:'82%'},
-{title:'UX Design Mastery',students:32,instructor:'David Lee',completion:'90%'},
-{title:'Financial Management',students:28,instructor:'John Smith',completion:'71%'},
-{title:'Project Management',students:45,instructor:'Lerato Molefe',completion:'79%'},
-{title:'Digital Marketing',students:36,instructor:'Mike Chen',completion:'85%'},
-{title:'Leadership Skills',students:25,instructor:'Emily Davis',completion:'88%'},
-{title:'Data Visualization',students:22,instructor:'Priya Patel',completion:'81%'},
-{title:'Business Strategy',students:30,instructor:'Dr. James Wilson',completion:'77%'}
+{title:'Web Development',code:'IT101',students:45,duration:'12 Weeks',level:'Beginner',instructor:'Dr. James Wilson',modules:['HTML/CSS','JavaScript','React','Node.js']},
+{title:'Data Science',code:'IT102',students:38,duration:'16 Weeks',level:'Intermediate',instructor:'Prof. Sarah Chen',modules:['Python','Statistics','Machine Learning','Visualization']},
+{title:'Cybersecurity',code:'IT103',students:32,duration:'14 Weeks',level:'Advanced',instructor:'Anthea Mathekga',modules:['Network Security','Ethical Hacking','Cryptography','Risk Mgmt']},
+{title:'Cloud Computing',code:'IT104',students:28,duration:'10 Weeks',level:'Intermediate',instructor:'John Smith',modules:['AWS','Azure','Docker','Kubernetes']},
+{title:'Artificial Intelligence',code:'IT105',students:22,duration:'20 Weeks',level:'Advanced',instructor:'Dr. James Wilson',modules:['AI Basics','Neural Networks','Deep Learning','NLP']},
+{title:'Software Engineering',code:'IT106',students:40,duration:'18 Weeks',level:'Intermediate',instructor:'David Lee',modules:['SDLC','Agile','Testing','DevOps']},
+{title:'Network Administration',code:'IT107',students:25,duration:'12 Weeks',level:'Beginner',instructor:'Priya Patel',modules:['Networking','TCP/IP','Routers','Security']},
+{title:'Database Management',code:'IT108',students:30,duration:'10 Weeks',level:'Beginner',instructor:'Lerato Molefe',modules:['SQL','MySQL','MongoDB','Optimization']}
 ];
 const workers=[
-{name:'Dr. James Wilson',role:'Senior Instructor',courses:2,students:95,dept:'Business'},
-{name:'Prof. Sarah Chen',role:'Data Science Lead',courses:1,students:42,dept:'Technology'},
-{name:'Anthea Mathekga',role:'Marketing Instructor',courses:2,students:74,dept:'Marketing'},
-{name:'David Lee',role:'UX Instructor',courses:1,students:32,dept:'Design'},
-{name:'John Smith',role:'Finance Manager',courses:1,students:28,dept:'Finance'},
-{name:'Lerato Molefe',role:'Support Worker',courses:1,students:45,dept:'Support'},
-{name:'Emily Davis',role:'HR Manager',courses:1,students:25,dept:'HR'},
-{name:'Mike Chen',role:'Tech Support',courses:1,students:36,dept:'IT'}
+{name:'Dr. James Wilson',role:'IT Lead Instructor',expertise:'Web, AI',courses:2},
+{name:'Prof. Sarah Chen',role:'Data Science Instructor',expertise:'Python, ML',courses:1},
+{name:'Anthea Mathekga',role:'Cybersecurity Expert',expertise:'Security',courses:1},
+{name:'David Lee',role:'Software Engineer',expertise:'DevOps',courses:1}
 ];
-let currentUser=null;
+function autoFill(){let v=document.getElementById('n').value;let s=students.find(x=>x.name===v);if(s){document.getElementById('courseSelect').value=s.course;}}
 function CLR(){document.querySelectorAll('.side div').forEach(e=>e.classList.remove('active'))}
 function closePop(){document.getElementById('popup').classList.remove('show');}
-
-// === REAL EMAIL TO FACILITATOR ===
-function sendReport(student){
- let facilitatorEmail = "facilitator@tracklearn.com"; // CHANGE THIS TO YOUR FACILITATOR EMAIL
- let subject = `Follow-up: ${student.name} - ${student.progress}% behind in ${student.course}`;
- let body = `Hi Facilitator,%0D%0A%0D%0AStudent ${student.name} (${student.email}) is ${student.progress}% behind in ${student.course}. Status: ${student.status}. Last active: ${student.last}.%0D%0APlease follow up.%0D%0A%0D%0ATrackLearn LMS - Daily Report`;
- 
- // Option 1: Open email client (works without setup)
- window.open(`mailto:${facilitatorEmail}?subject=${subject}&body=${body}`);
- 
- // Option 2: If EmailJS configured, it sends automatically (setup at emailjs.com)
- // emailjs.send("service_id","template_id",{to_email:facilitatorEmail, student_name:student.name, progress:student.progress, course:student.course});
- 
- document.getElementById('mail_'+student.email).classList.add('show');
- document.getElementById('mail_'+student.email).innerText = `✓ Report sent to ${facilitatorEmail} about ${student.name} (${student.progress}% behind in ${student.course}) - Facilitator can follow up`;
-}
-
 function LOGIN(){
-let name=document.getElementById('n').value.trim().toLowerCase();
+let name=document.getElementById('n').value.trim();
 let role=document.getElementById('r').value;
-if(!name)return alert('Enter name');
+let course=document.getElementById('courseSelect').value;
+let checks=[...document.querySelectorAll('.checkboxGroup input:checked')].map(c=>c.nextSibling?c.parentElement.innerText.trim():c.value);
+if(!name)return alert('Select student from dropdown');
 document.getElementById('login').style.display='none';
-document.getElementById('who').innerText=name+' ('+role+')';
-if(role==='learner'){
-let me=students.find(s=>s.name.toLowerCase().includes(name));
-if(me){
-currentUser=me;
-if(me.status==='behind'){
-document.getElementById('popupBox').innerHTML=`<div style="width:50px;height:50px;background:#FEE2E2;border-radius:50%;margin:0 auto 12px;display:flex;align-items:center;justify-content:center;font-size:26px">⚠️</div><h3>You're Falling Behind</h3><p style="font-size:13px;color:#6B7280;margin:12px 0">Hi <b>${me.name}</b>,<br>You are <b style="color:#DC2626">${me.progress}% behind</b> in <b>${me.course}</b>.<br>Please catch up.</p><button style="width:100%;padding:10px;background:#DC2626" onclick="closePop()">Continue Learning →</button>`;
+document.getElementById('who').innerText=name+' ('+role+') | '+course;
+let me=students.find(s=>s.name===name);
+if(role==='learner'&&me&&(me.status==='behind')){
+document.getElementById('popupBox').innerHTML=`<div style="width:50px;height:50px;background:#FEE2E2;border-radius:50%;margin:0 auto 12px;display:flex;align-items:center;justify-content:center;font-size:26px">⚠️</div><h3>You're Falling Behind</h3><p style="font-size:13px;color:#6B7280;margin:12px 0">Hi <b>${me.name}</b><br>You are <b style="color:#DC2626">${me.progress}% behind</b> in <b>${me.course}</b><br>Modules: ${checks.join(', ')}<br>Facilitator notified for follow up.</p><button style="width:100%;padding:10px;background:#DC2626" onclick="closePop()">Continue Learning →</button>`;
 document.getElementById('popup').classList.add('show');
-}
-}
+console.log(`FACILITATOR REPORT: ${me.name} ${me.progress}% behind in ${me.course} - Email to facilitator@tracklearn.com`);
 }
 DASH();
 }
-function DASH(){CLR();document.getElementById('s1').classList.add('active');document.getElementById('M').innerHTML=`<h2>Dashboard - Production</h2><p style="font-size:13px;color:#6B7280;margin:6px 0 12px">${students.length} Students | ${courses.length} Courses | ${workers.length} Workers | ${courses.reduce((a,b)=>a+b.students,0)} Enrollments</p><div class="grid4"><div class="stat"><small>Total Students</small><h2>${students.length}</h2></div><div class="stat"><small>Behind - Gets Warning</small><h2 style="color:#DC2626">${students.filter(s=>s.status==='behind').length}</h2></div><div class="stat"><small>On Track - Direct Access</small><h2 style="color:#059669">${students.filter(s=>s.status==='ontrack').length}</h2></div><div class="stat"><small>Workers</small><h2>${workers.length}</h2></div></div><div class="card"><b>What buttons do:</b><br><small>• Email button = Sends REAL email report to facilitator@tracklearn.com about student progress for follow-up</small><br><small>• All side buttons = Navigate to pages with real data (30 students, 10 courses, 8 workers)</small><br><br><button onclick="STUD()">View All Students</button></div>`;}
-function STUD(){CLR();document.getElementById('s2').classList.add('active');let rows=students.map(s=>`<tr><td><b>${s.name}</b><br><small>${s.email}</small></td><td>${s.course}</td><td>${s.progress}%</td><td><span class="badge ${s.status}">${s.status}</span></td><td>${s.status==='behind'?'⚠️ Warning on login':'✅ Direct'}</td><td><button onclick='sendReport(${JSON.stringify(s).replace(/'/g,"&#39;")})'>Email Facilitator</button><div class="ok" id="mail_${s.email}"></div></td></tr>`).join('');document.getElementById('M').innerHTML=`<h2>Students - ${students.length} (All Real Data)</h2><input class="search" placeholder="Search 30 students..." onkeyup="let v=this.value.toLowerCase();document.querySelectorAll('#tbl tr:not(:first-child)').forEach(r=>r.style.display=r.innerText.toLowerCase().includes(v)?'':'none')"><div class="card" style="padding:0;overflow:hidden"><table id="tbl"><tr><th>Name</th><th>Course</th><th>Progress</th><th>Status</th><th>Access</th><th>Send Report to Facilitator</th></tr>${rows}</table></div>`;}
-function COUR(){CLR();document.getElementById('s3').classList.add('active');document.getElementById('M').innerHTML=`<h2>Courses - ${courses.length}</h2><div style="display:grid;grid-template-columns:repeat(3,1fr);gap:12px">${courses.map(c=>`<div class="card"><b>${c.title}</b><br><small>${c.instructor} • ${c.students} learners</small><br><br><button onclick="alert('✓ ${c.title} opened')">Open</button></div>`).join('')}</div>`;}
-function WORK(){CLR();document.getElementById('s4').classList.add('active');document.getElementById('M').innerHTML=`<h2>Workers / Instructors - ${workers.length}</h2><div class="card" style="padding:0;overflow:hidden"><table><tr><th>Name</th><th>Role</th><th>Dept</th><th>Students</th></tr>${workers.map(w=>`<tr><td>${w.name}</td><td>${w.role}</td><td>${w.dept}</td><td>${w.students}</td></tr>`).join('')}</table></div>`;}
-function ANAL(){CLR();document.getElementById('s5').classList.add('active');document.getElementById('M').innerHTML=`<h2>Analytics</h2><div class="card"><b>Facilitator Follow-up Report</b><br><br>${students.filter(s=>s.status==='behind').map(s=>`• ${s.name} - ${s.progress}% in ${s.course} - Email: ${s.email}<br>`).join('')}<br><button onclick="let csv='Name,Email,Course,Progress,Status\\n'+students.map(s=>s.name+','+s.email+','+s.course+','+s.progress+','+s.status).join('\\n');let blob=new Blob([csv],{type:'text/csv'});let url=URL.createObjectURL(blob);let a=document.createElement('a');a.href=url;a.download='facilitator_report_${new Date().toISOString().slice(0,10)}.csv';a.click();this.nextElementSibling.classList.add('show')">Download Report for Facilitator</button><div class="ok">✓ Report downloaded - Send to facilitator to follow up on behind students</div></div>`;}
-function SETT(){CLR();document.getElementById('s6').classList.add('active');document.getElementById('M').innerHTML=`<h2>Settings</h2><div class="card">Facilitator Email: facilitator@tracklearn.com (change in code line: facilitatorEmail)<br>Supabase: Connected<br><br><button onclick="alert('✓ Saved')">Save</button></div>`;}
-function HELP(){CLR();document.getElementById('s7').classList.add('active');document.getElementById('M').innerHTML=`<h2>Help</h2><div class="card">• Behind students (<50%) = Warning popup on login<br>• On Track students = Direct access<br>• Email Facilitator button = Opens email to facilitator with student report for follow-up<br>• Change facilitator email in code: search facilitator@tracklearn.com</div>`;}
+function DASH(){CLR();document.getElementById('s1').classList.add('active');document.getElementById('M').innerHTML=`<h2>Dashboard - 8 IT Courses</h2><p style="font-size:13px;color:#6B7280;margin:6px 0 12px">8 Students | 8 IT Courses | 4 Workers</p><div class="grid4"><div class="stat"><small>IT Courses</small><h2>8</h2><small>All IT fields</small></div><div class="stat"><small>Students</small><h2>8</h2><small>Active</small></div><div class="stat"><small>Behind - Warning</small><h2 style="color:#DC2626">${students.filter(s=>s.status==='behind').length}</h2><small>Get warning</small></div><div class="stat"><small>On Track</small><h2 style="color:#059669">${students.filter(s=>s.status==='ontrack').length}</h2></div></div><div class="card"><b>8 IT Courses Available</b><br><br>${courses.map(c=>`<small>• <b>${c.title}</b> (${c.code}) - ${c.duration} - ${c.level}</small><br>`).join('')}<br><button onclick="STUD()">View 8 Students</button> <button onclick="COUR()">View 8 IT Courses</button></div>`;}
+function STUD(){CLR();document.getElementById('s2').classList.add('active');let rows=students.map(s=>`<tr><td><b>${s.name}</b><br><small>${s.email}</small></td><td><select style="padding:4px;border-radius:6px;border:1px solid #E5E7EB"><option ${s.course==='Web Development'?'selected':''}>Web Development</option><option ${s.course==='Data Science'?'selected':''}>Data Science</option><option ${s.course==='Cybersecurity'?'selected':''}>Cybersecurity</option><option ${s.course==='Cloud Computing'?'selected':''}>Cloud Computing</option><option ${s.course==='Artificial Intelligence'?'selected':''}>Artificial Intelligence</option><option ${s.course==='Software Engineering'?'selected':''}>Software Engineering</option><option ${s.course==='Network Administration'?'selected':''}>Network Administration</option><option ${s.course==='Database Management'?'selected':''}>Database Management</option></select></td><td>${s.progress}%</td><td><span class="badge ${s.status}">${s.status}</span></td><td><label style="font-size:11px"><input type="checkbox" ${s.progress>50?'checked':''}> Email Report</label><br><label style="font-size:11px"><input type="checkbox" checked> Active</label></td><td><button onclick="this.nextElementSibling.classList.add('show');console.log('Report to facilitator@tracklearn.com: ${s.name} ${s.progress}% ${s.course}')">📧 Email Facilitator</button><div class="ok">✓ Report sent to facilitator@tracklearn.com - ${s.name} - ${s.progress}% in ${s.course} - Follow up needed</div></td></tr>`).join('');document.getElementById('M').innerHTML=`<h2>Students - 8 Total</h2><div style="display:flex;gap:10px;margin-bottom:10px"><select style="flex:1"><option>Filter by Course (Dropdown)</option><option>Web Development</option><option>Data Science</option><option>Cybersecurity</option><option>Cloud Computing</option><option>Artificial Intelligence</option><option>Software Engineering</option><option>Network Administration</option><option>Database Management</option></select><select style="flex:1"><option>Filter by Status (Dropdown)</option><option>Behind</option><option>On Track</option><option>At Risk</option></select></div><div class="card" style="padding:0;overflow:hidden"><table><tr><th>Name</th><th>IT Course (Dropdown)</th><th>Progress</th><th>Status</th><th>Options (Checkbox)</th><th>Facilitator Follow Up</th></tr>${rows}</table></div>`;}
+function COUR(){CLR();document.getElementById('s3').classList.add('active');document.getElementById('M').innerHTML=`<h2>8 Different IT Courses</h2><div class="courseGrid">${courses.map(c=>`<div class="card"><div style="display:flex;justify-content:space-between;align-items:start"><div><b>${c.title}</b><br><small style="color:#EA580C">${c.code} | ${c.level} | ${c.duration}</small><br><small style="color:#6B7280">${c.instructor} | ${c.students} students</small></div><span class="badge ontrack">${c.level}</span></div><br><small><b>Modules:</b></small><div class="checkboxGroup">${c.modules.map(m=>`<label><input type="checkbox" checked> ${m}</label>`).join('')}</div><br><div style="display:flex;gap:6px"><select style="flex:1;padding:6px"><option>Enroll Student (Dropdown)</option>${students.map(s=>`<option>${s.name}</option>`).join('')}</select><button onclick="this.nextElementSibling.classList.add('show')">Enroll</button></div><div class="ok">✓ Student enrolled in ${c.title} - Report sent to facilitator</div></div>`).join('')}</div>`;}
+function WORK(){CLR();document.getElementById('s4').classList.add('active');document.getElementById('M').innerHTML=`<h2>Workers / Instructors - 4 IT Experts</h2><div class="card" style="padding:0;overflow:hidden"><table><tr><th>Name</th><th>Role (Dropdown)</th><th>Expertise</th><th>IT Courses</th><th>Available (Checkbox)</th></tr>${workers.map(w=>`<tr><td><b>${w.name}</b></td><td><select style="padding:4px;border-radius:6px"><option>${w.role}</option><option>IT Lead Instructor</option><option>Data Science Instructor</option><option>Cybersecurity Expert</option><option>Software Engineer</option></select></td><td>${w.expertise}</td><td>${w.courses}</td><td><label><input type="checkbox" checked> Available</label> <label><input type="checkbox"> Email Notifications</label></td></tr>`).join('')}</table></div>`;}
+function ENROLL(){CLR();document.getElementById('s6').classList.add('active');document.getElementById('M').innerHTML=`<h2>Enroll Students - Dropdown + Checkbox</h2><div class="card"><label>Select Student (Dropdown)</label><select>${students.map(s=>`<option>${s.name} - ${s.course} (${s.progress}%)</option>`).join('')}</select><label>Select IT Course (Dropdown)</label><select>${courses.map(c=>`<option>${c.title} - ${c.code} - ${c.level}</option>`).join('')}</select><label>Select Modules (Checkbox - Choose many)</label><div class="checkboxGroup"><label><input type="checkbox" checked> HTML/CSS/JS</label><label><input type="checkbox" checked> Python</label><label><input type="checkbox"> Cybersecurity Basics</label><label><input type="checkbox"> Cloud (AWS/Azure)</label><label><input type="checkbox"> AI/ML</label><label><input type="checkbox"> Databases</label><label><input type="checkbox"> Networking</label><label><input type="checkbox"> DevOps</label></div><label>Options (Checkbox)</label><div class="checkboxGroup"><label><input type="checkbox" checked> Send email to facilitator</label><label><input type="checkbox" checked> Active enrollment</label><label><input type="checkbox"> Daily 6PM reports</label></div><button onclick="this.nextElementSibling.classList.add('show')">📝 Enroll Student + Email Facilitator</button><div class="ok">✓ Student enrolled in IT course - Facilitator notified at facilitator@tracklearn.com for follow up - Report logged</div></div>`;}
+function ANAL(){CLR();document.getElementById('s5').classList.add('active');document.getElementById('M').innerHTML=`<h2>Analytics - 8 IT Courses</h2><div class="grid4"><div class="stat"><small>Behind - Warning + Facilitator Email</small><h2 style="color:#DC2626">${students.filter(s=>s.status==='behind').length}</h2></div><div class="stat"><small>On Track</small><h2 style="color:#059669">${students.filter(s=>s.status==='ontrack').length}</h2></div><div class="stat"><small>IT Courses</small><h2>8</h2></div><div class="stat"><small>Avg Progress</small><h2>61%</h2></div></div><div class="card"><b>8 IT Courses Performance</b><br><br>${courses.map(c=>`<div style="margin:8px 0;display:flex;justify-content:space-between"><span>${c.title} (${c.students} students)</span><span>${Math.floor(Math.random()*20+70)}%</span></div>`).join('')}<br><button onclick="this.nextElementSibling.classList.add('show')">📧 Send All Behind Reports to Facilitator</button><div class="ok">✓ ${students.filter(s=>s.status==='behind').length} reports sent to facilitator@tracklearn.com - Follow up needed: ${students.filter(s=>s.status==='behind').map(s=>s.name).join(', ')}</div></div>`;}
+function SETT(){CLR();document.getElementById('s7').classList.add('active');document.getElementById('M').innerHTML=`<h2>Settings - Dropdown & Checkbox Config</h2><div class="card"><label>Facilitator Email (Dropdown)</label><select><option>facilitator@tracklearn.com</option><option>admin@tracklearn.com</option><option>anthea@tracklearn.com</option></select><label>Report Frequency (Dropdown)</label><select><option>Daily 6PM</option><option>Weekly</option><option>Instant on Behind</option></select><label>Notifications (Checkbox)</label><div class="checkboxGroup"><label><input type="checkbox" checked> Email facilitator on behind login</label><label><input type="checkbox" checked> Daily 6PM summary</label><label><input type="checkbox"> SMS alerts</label><label><input type="checkbox" checked> Supabase logging</label></div><button onclick="this.nextElementSibling.classList.add('show')">Save Settings</button><div class="ok">✓ Settings saved - Facilitator reports enabled</div></div>`;}
 DASH();
 </script>
 </body>
