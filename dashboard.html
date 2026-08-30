@@ -1,0 +1,103 @@
+<!DOCTYPE html><html><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Dashboard - TrackLearn</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@700;800&family=Inter:wght@400;600&display=swap" rel="stylesheet">
+<style>*{margin:0;padding:0;box-sizing:border-box}body{font-family:Inter,sans-serif;background:#FFFBF7}
+.header{background:#FFF5EB;display:flex;justify-content:space-between;align-items:center;padding:14px 20px;position:sticky;top:0;z-index:10}
+.logo{font-family:Poppins;font-weight:800;font-size:22px;color:#FF8A2E}
+.container{max-width:900px;margin:0 auto;padding:18px}
+.card{background:white;border-radius:16px;padding:16px;border:1px solid #FFDDC0;box-shadow:0 4px 14px rgba(255,138,46,0.06);margin-bottom:14px}
+.search-row{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:12px}
+.search-row input, .search-row select{flex:1;min-width:140px;padding:11px 14px;border:1.5px solid #FFDDC0;border-radius:10px;outline:none}
+.search-row input:focus{border-color:#FF8A2E}
+.btn{border:none;border-radius:10px;padding:11px 16px;font-weight:700;cursor:pointer}
+.btn-orange{background:#FF9A45;color:white}.btn-light{background:#FFF5EB;color:#FF8A2E;border:1px solid #FF9A45}
+.table{width:100%;border-collapse:collapse;font-size:13.5px}
+.table th{background:#FFF5EB;color:#FF8A2E;text-align:left;padding:10px;border-bottom:2px solid #FFDDC0}
+.table td{padding:10px;border-bottom:1px solid #FFEEE0}
+.badge{padding:4px 8px;border-radius:999px;font-size:11px;font-weight:700}
+.active{background:#E6F8E6;color:#2E7D32}.inactive{background:#FFEBEE;color:#C62828}.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+@media(max-width:600px){.form-grid{grid-template-columns:1fr}.table{font-size:12px}}
+</style></head><body>
+<div class="header"><div class="logo">TrackLearn • Dashboard</div><div><a href="index.html" style="color:#FF8A2E;text-decoration:none;font-weight:600;margin-right:12px">Home</a><a href="#" onclick="localStorage.clear();location.href='login.html'" style="color:#888;text-decoration:none">Logout</a></div></div>
+<div class="container">
+<div class="card">
+<h3 style="font-family:Poppins;margin-bottom:10px">Task 8: Database - Students Table</h3>
+<div class="form-grid">
+<input id="name" placeholder="Name - e.g. Cindy Ntsundeni">
+<input id="email" placeholder="Email - e.g. cindy@tracklearn.co.za">
+<select id="course"><option>Web Dev 45</option><option>Data Science 38</option><option>Cybersecurity 32</option><option>Cloud 28</option><option>AI 22</option><option>Software Eng 40</option><option>Network 25</option><option>DB 30</option></select>
+<input id="progress" type="number" placeholder="Progress % 0-100">
+</div>
+<button class="btn btn-orange" style="width:100%;margin-top:12px" onclick="addStudent()">+ Add Student (Task 9: add)</button>
+</div>
+
+<div class="card">
+<h3 style="font-family:Poppins;margin-bottom:10px">Task 9: Core Feature - Activity Tracking & Search</h3>
+<p style="font-size:12.5px;color:#777;margin-bottom:10px">User Story: As facilitator I want to see inactive learners so I can follow up</p>
+<div class="search-row">
+<input id="search" placeholder="🔍 Search name, email, course..." oninput="render()">
+<select id="filter" onchange="render()"><option value="all">All Learners</option><option value="active">Active (last 7 days)</option><option value="inactive">Inactive (>7 days) - Needs Follow-up</option></select>
+</div>
+<div style="overflow-x:auto">
+<table class="table"><thead><tr><th>Name</th><th>Email</th><th>Course</th><th>Progress</th><th>Last Active</th><th>Status</th><th>Action</th></tr></thead><tbody id="tbody"></tbody></table>
+</div>
+<p style="margin-top:10px;font-size:12px;color:#888">Total: <b id="total">0</b> | Inactive: <b id="inactiveCount" style="color:#C62828">0</b> - Follow up needed</p>
+</div>
+
+<div class="card" style="background:#FFF5EB">
+<b>SCRUM-12 - By Anthea Mathekga</b><br><span style="font-size:13px">Frontend Development - HTML/CSS/JS - Responsive desktop + mobile - DONE. This dashboard implements SCRUM-14 (Database) + SCRUM-15 (Search, add, edit, delete, last active tracking)</span>
+</div>
+</div>
+
+<script>
+let students = JSON.parse(localStorage.getItem('tracklearn_students')||'[]');
+if(students.length===0){
+ students=[
+  {id:1,name:'Cindy Ntsundeni',email:'cindy@tracklearn.co.za',course:'Web Dev 45',progress:85,lastActive:new Date().toISOString()},
+  {id:2,name:'Siviwe Gqoko',email:'siviwe@tracklearn.co.za',course:'Data Science 38',progress:42,lastActive:new Date(Date.now()-10*86400000).toISOString()},
+  {id:3,name:'Phumelele Miya',email:'phumelele@tracklearn.co.za',course:'Cybersecurity 32',progress:78,lastActive:new Date().toISOString()},
+  {id:4,name:'Anthea Mathekga',email:'anthea@tracklearn.co.za',course:'Software Eng 40',progress:95,lastActive:new Date().toISOString()},
+ ];
+ save();
+}
+function save(){localStorage.setItem('tracklearn_students',JSON.stringify(students));}
+function addStudent(){
+ const name=document.getElementById('name').value.trim();
+ const email=document.getElementById('email').value.trim();
+ const course=document.getElementById('course').value;
+ const progress=parseInt(document.getElementById('progress').value)||0;
+ if(!name||!email)return alert('Enter name & email');
+ students.push({id:Date.now(),name,email,course,progress,lastActive:new Date().toISOString()});
+ save(); render();
+ document.getElementById('name').value='';document.getElementById('email').value='';document.getElementById('progress').value='';
+}
+function deleteStudent(id){if(confirm('Delete this student?')){students=students.filter(s=>s.id!==id);save();render();}}
+function editStudent(id){
+ const s=students.find(x=>x.id===id);
+ const newProg=prompt(`Edit progress for ${s.name} (0-100):`,s.progress);
+ if(newProg!==null){s.progress=Math.min(100,Math.max(0,parseInt(newProg)||0));s.lastActive=new Date().toISOString();save();render();}
+}
+function isInactive(dateStr){return (Date.now()-new Date(dateStr).getTime()) > 7*86400000;}
+function formatDate(d){const diff=Math.floor((Date.now()-new Date(d).getTime())/86400000); if(diff===0)return 'Today'; if(diff===1)return '1 day ago'; return `${diff} days ago`;}
+function render(){
+ const q=document.getElementById('search').value.toLowerCase();
+ const f=document.getElementById('filter').value;
+ let filtered=students.filter(s=> (s.name.toLowerCase().includes(q)||s.email.toLowerCase().includes(q)||s.course.toLowerCase().includes(q)) );
+ if(f==='active') filtered=filtered.filter(s=>!isInactive(s.lastActive));
+ if(f==='inactive') filtered=filtered.filter(s=>isInactive(s.lastActive));
+ document.getElementById('total').innerText=students.length;
+ document.getElementById('inactiveCount').innerText=students.filter(s=>isInactive(s.lastActive)).length;
+ document.getElementById('tbody').innerHTML=filtered.map(s=>`
+  <tr>
+   <td><b>${s.name}</b></td>
+   <td>${s.email}</td>
+   <td>${s.course}</td>
+   <td>${s.progress}%</td>
+   <td>${formatDate(s.lastActive)}</td>
+   <td><span class="badge ${isInactive(s.lastActive)?'inactive':'active'}">${isInactive(s.lastActive)?'Inactive':'Active'}</span></td>
+   <td><button onclick="editStudent(${s.id})" style="color:#FF8A2E;background:none;border:none;cursor:pointer;font-weight:700">Edit</button> <button onclick="deleteStudent(${s.id})" style="color:#C62828;background:none;border:none;cursor:pointer">Del</button></td>
+  </tr>
+ `).join('') || '<tr><td colspan=7 style="text-align:center;padding:20px;color:#888">No learners found</td></tr>';
+}
+render();
+</script>
+</body></html>
