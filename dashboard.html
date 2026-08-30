@@ -1,42 +1,28 @@
-<!DOCTYPE html><html><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Dashboard - TrackLearn</title><link href="https://fonts.googleapis.com/css2?family=Poppins:wght@700;800&family=Inter:wght@400;600&display=swap" rel="stylesheet"><script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script><style>*{margin:0;padding:0;box-sizing:border-box}body{font-family:Inter,sans-serif;background:#FFFBF7}.header{background:#FFF5EB;display:flex;justify-content:space-between;align-items:center;padding:14px 20px;position:sticky;top:0;z-index:100}.logo{font-family:Poppins;font-weight:800;font-size:18px;color:#FF8A2E}.container{max-width:1000px;margin:0 auto;padding:18px}.card{background:white;border-radius:16px;padding:18px;border:1px solid #FFDDC0;box-shadow:0 4px 14px rgba(255,138,46,.06);margin-bottom:16px}.form{display:grid;grid-template-columns:1fr 1fr;gap:10px}input,select{padding:11px;border:1.5px solid #FFDDC0;border-radius:10px;width:100%;font-size:14px}.btn{background:#FF9A45;color:white;border:none;border-radius:10px;padding:12px;font-weight:700;cursor:pointer;width:100%;margin-top:10px}.table-wrap{overflow-x:auto}.table{width:100%;border-collapse:collapse;font-size:13.5px;min-width:700px}.table th{background:#FFF5EB;color:#FF8A2E;padding:12px 10px;text-align:left;border-bottom:2px solid #FFDDC0}.table td{padding:12px 10px;border-bottom:1px solid #FFEEE0}.badge{padding:4px 10px;border-radius:999px;font-size:11px;font-weight:700}.active{background:#E6F8E6;color:#2E7D32}.inactive{background:#FFEBEE;color:#C62828}.search-row{display:flex;gap:8px;margin-bottom:12px}@media(max-width:600px){.form{grid-template-columns:1fr}}</style></head><body><div class="header"><div class="logo">TrackLearn • Dashboard</div><div><a href="index.html" style="color:#FF8A2E;text-decoration:none;font-weight:700;margin-right:12px">Home</a><a href="login.html" style="color:#888;text-decoration:none;font-size:13px">Logout</a></div></div><div class="container"><div class="card"><h3 style="font-family:Poppins;margin-bottom:12px">Add New Learner</h3><div class="form"><input id="name" placeholder="Full Name"><input id="email" placeholder="Email"><select id="course"><option>Web Development</option><option>Data Science</option><option>Cybersecurity</option><option>Cloud Computing</option><option>Artificial Intelligence</option><option>Software Engineering</option><option>Networking</option><option>Database Management</option><option>Network Administration</option></select><input id="progress" type="number" min="0" max="100" placeholder="Progress %"></div><button class="btn" onclick="addLearner()">+ Add Learner</button><p id="status" style="margin-top:10px;font-size:13px;color:#FF8A2E"></p></div><div class="card"><h3 style="font-family:Poppins;margin-bottom:14px">Learner Activity Tracking</h3><div class="search-row"><input id="search" placeholder="Search by name, email, course..." oninput="render()" style="flex:1"><select id="filter" onchange="render()" style="min-width:150px"><option value="all">All Learners</option><option value="active">Active</option><option value="inactive">Inactive >7 days</option></select></div><div class="table-wrap"><table class="table"><thead><tr><th>Name</th><th>Email</th><th>Course</th><th>Progress</th><th>Last Active</th><th>Status</th><th>Action</th></tr></thead><tbody id="tbody"><tr><td colspan="7" style="text-align:center;padding:24px;color:#888">Loading from Supabase...</td></tr></tbody></table></div><p style="margin-top:14px;font-size:12px;color:#666">Total: <b id="total">0</b> | Inactive: <b id="inactiveCount" style="color:#C62828">0</b></p></div></div><script>
-const SUPABASE_URL="https://fimoqlvsjzgibuxwutcf.supabase.co";
-const SUPABASE_KEY="sb_publishable_bMIt_LUDEXHeZN0D3RoQIA_ke5NdUlu";
-const client=supabase.createClient(SUPABASE_URL,SUPABASE_KEY);
-const TABLE_NAME="students";
-let learners=[];
-async function loadLearners(){
-  const {data,error}=await client.from(TABLE_NAME).select('*').order('created_at',{ascending:false});
-  if(error){document.getElementById('tbody').innerHTML=`<tr><td colspan=7 style="color:red;text-align:center;padding:20px">${error.message}</td></tr>`;return;}
+<!DOCTYPE html><html><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Dashboard</title><script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script><style>body{font-family:Inter,sans-serif;padding:20px;background:#FFFBF7}.card{background:white;padding:18px;border-radius:14px;border:1px solid #FFDDC0;margin-bottom:16px}.btn{background:#FF9A45;color:white;border:none;padding:12px;border-radius:10px;width:100%;font-weight:700;cursor:pointer}input,select{padding:11px;border:1.5px solid #FFDDC0;border-radius:10px;width:100%} .form{display:grid;grid-template-columns:1fr 1fr;gap:10px}.table{width:100%;border-collapse:collapse}.table th{background:#FFF5EB;color:#FF8A2E;padding:10px;text-align:left}.table td{padding:10px;border-bottom:1px solid #FFEEE0}</style></head><body>
+<div class="card"><h3>Add New Learner</h3><div class="form"><input id="name" placeholder="Full Name"><input id="email" placeholder="Email"><select id="course"><option>Web Development</option><option>Data Science</option><option>Cybersecurity</option><option>Cloud Computing</option></select><input id="progress" type="number" placeholder="Progress %"></div><button class="btn" onclick="addLearner()">+ Add Learner</button><p id="statusMsg" style="color:#d00"></p></div>
+<div class="card"><h3>Learner Activity Tracking</h3><div id="list">Loading...</div><p>Total: <b id="total">0</b> | Inactive: <b id="inactiveCount">0</b></p></div>
+<script>
+const client=supabase.createClient("https://fimoqlvsjzgibuxwutcf.supabase.co","sb_publishable_bMIt_LUDEXHeZN0D3RoQIA_ke5NdUlu");
+const TABLE="students"; let learners=[];
+async function load(){
+  const {data,error}=await client.from(TABLE).select('*').order('id',{ascending:false});
+  if(error){document.getElementById('list').innerHTML='<span style=color:red>'+error.message+'</span>';return;}
   learners=data; render();
+}
+function render(){
+  document.getElementById('total').innerText=learners.length;
+  document.getElementById('list').innerHTML='<table class=table><tr><th>Name</th><th>Email</th><th>Course</th><th>Progress</th><th>Status</th></tr>'+learners.map(s=>`<tr><td>${s.name}</td><td>${s.email}</td><td>${s.course}</td><td>${s.progress||0}%</td><td>${s.status||'Active'}</td></tr>`).join('')+'</table>';
 }
 async function addLearner(){
   const n=document.getElementById('name').value.trim();
   const e=document.getElementById('email').value.trim();
   const c=document.getElementById('course').value;
   const p=parseInt(document.getElementById('progress').value)||0;
-  if(!n||!e){alert('Enter name and email');return;}
-  document.getElementById('status').innerText='Saving...';
-  const {error}=await client.from(TABLE_NAME).insert([{name:n,email:e,course:c,progress:p,last_active:new Date().toISOString()}]);
-  if(error){document.getElementById('status').innerText='Error: '+error.message;}
-  else{document.getElementById('status').innerText='Saved!';document.getElementById('name').value='';document.getElementById('email').value='';document.getElementById('progress').value='';loadLearners();setTimeout(()=>document.getElementById('status').innerText='',2000);}
+  if(!n||!e){alert('name & email required');return;}
+  document.getElementById('statusMsg').innerText='Saving...';
+  const {error}=await client.from(TABLE).insert([{name:n,email:e,course:c,progress:p,status:'Active',last_active:new Date().toISOString()}]);
+  if(error) document.getElementById('statusMsg').innerText='Error: '+error.message;
+  else {document.getElementById('statusMsg').innerText='Saved!'; load();}
 }
-async function deleteLearner(id){if(!confirm('Delete?'))return;await client.from(TABLE_NAME).delete().eq('id',id);loadLearners();}
-async function editLearner(id){
-  const l=learners.find(x=>x.id===id);
-  const pr=prompt(`Update progress for ${l.name}:`,l.progress);
-  if(pr!==null){await client.from(TABLE_NAME).update({progress:Math.min(100,Math.max(0,parseInt(pr)||0)),last_active:new Date().toISOString()}).eq('id',id);loadLearners();}
-}
-function isInactive(d){if(!d)return true; return (Date.now()-new Date(d).getTime())>7*86400000;}
-function fmt(d){if(!d)return 'Never';const diff=Math.floor((Date.now()-new Date(d).getTime())/86400000);if(diff===0)return'Today';if(diff===1)return'1 day ago';return`${diff} days ago`;}
-function render(){
-  const q=document.getElementById('search').value.toLowerCase();
-  const f=document.getElementById('filter').value;
-  let list=learners.filter(s=> (s.name||'').toLowerCase().includes(q) || (s.email||'').toLowerCase().includes(q) || (s.course||'').toLowerCase().includes(q));
-  if(f==='active')list=list.filter(s=>!isInactive(s.last_active||s.created_at));
-  if(f==='inactive')list=list.filter(s=>isInactive(s.last_active||s.created_at));
-  document.getElementById('total').innerText=learners.length;
-  document.getElementById('inactiveCount').innerText=learners.filter(s=>isInactive(s.last_active||s.created_at)).length;
-  document.getElementById('tbody').innerHTML=list.map(s=>`<tr><td><b>${s.name}</b></td><td>${s.email}</td><td>${s.course}</td><td>${s.progress}%</td><td>${fmt(s.last_active||s.created_at)}</td><td><span class="badge ${isInactive(s.last_active||s.created_at)?'inactive':'active'}">${isInactive(s.last_active||s.created_at)?'Inactive':'Active'}</span></td><td><a href="mailto:${s.email}?subject=Follow-up" style="color:#FF8A2E;font-weight:700;text-decoration:none">Email</a><button onclick="editLearner('${s.id}')" style="background:none;border:none;color:#888;font-weight:700;cursor:pointer;margin-left:6px">Edit</button><button onclick="deleteLearner('${s.id}')" style="background:none;border:none;color:#C62828;cursor:pointer;margin-left:4px">Del</button></td></tr>`).join('') || '<tr><td colspan=7 style="text-align:center;padding:24px;color:#888">No learners</td></tr>';
-}
-loadLearners();
+load();
 </script></body></html>
