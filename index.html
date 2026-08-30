@@ -1,35 +1,151 @@
-<!DOCTYPE html><html><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>TrackLearn</title>
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@700;800&family=Inter:wght@400&display=swap" rel="stylesheet">
-<style>*{margin:0;padding:0;box-sizing:border-box;scroll-behavior:smooth}body{font-family:Inter,sans-serif}
-.header{background:#FFF5EB;display:flex;justify-content:space-between;align-items:center;padding:14px 18px;position:sticky;top:0;z-index:100}
-.logo{font-family:Poppins;font-weight:800;font-size:26px;color:#FF8A2E}.menu{width:30px;height:20px;display:flex;flex-direction:column;justify-content:space-between;cursor:pointer}.menu span{height:3px;background:#FF8A2E;border-radius:10px;display:block}
-.hero{position:relative;width:100%;height:88vh}.hero img{width:100%;height:100%;object-fit:cover}
-.glass{position:absolute;left:12px;right:12px;bottom:18px;background:rgba(255,255,255,0.86);backdrop-filter:blur(12px);border-radius:18px;padding:18px 16px;border:1px solid #FFDDC0}
-.glass h1{font-family:Poppins;font-weight:800;font-size:24px;line-height:1.2}.glass h1 span{color:#FF8A2E}.glass p{margin-top:8px;font-size:13px;color:#555}.btns{margin-top:14px;display:flex;gap:10px;flex-wrap:wrap}.btn{border-radius:999px;padding:11px 22px;font-weight:700;font-size:14px;border:none;cursor:pointer;text-decoration:none;display:inline-block}.fill{background:#FF9A45;color:#fff}.outline{background:#FFF5EB;color:#FF8A2E;border:1.6px solid #FF9A45}.bar{background:#FFC49A;height:48px;width:100%}
-.section{padding:40px 18px}.title{font-family:Poppins;font-size:26px;font-weight:800;text-align:center;margin-bottom:16px}.card{background:white;border-radius:16px;padding:16px;box-shadow:0 4px 16px rgba(255,138,46,0.08);border:1px solid #FFDDC0;max-width:700px;margin:0 auto;line-height:1.5;font-size:14px}
-.contact{background:#FF9A45;color:white;padding:36px 18px;text-align:center}.contact button{background:white;color:#FF8A2E;border:none;padding:12px 28px;border-radius:999px;font-weight:700;margin-top:12px}
-.nav-menu{display:none;position:fixed;top:60px;right:12px;background:white;border-radius:12px;box-shadow:0 8px 20px rgba(0,0,0,0.15);padding:12px;z-index:200}.nav-menu a{display:block;padding:10px 16px;text-decoration:none;color:#333;font-size:14px;border-radius:8px}.nav-menu a:hover{background:#FFF5EB;color:#FF8A2E}
-</style></head><body>
-<div class="header"><div class="logo">TrackLearn</div><div class="menu" onclick="document.getElementById('nav').style.display=document.getElementById('nav').style.display=='block'?'none':'block'"><span></span><span></span><span></span></div></div>
-<div class="nav-menu" id="nav">
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TrackLearn - Empower Your Growth</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@700;800&family=Inter:wght@400;600&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;scroll-behavior:smooth}
+body{font-family:'Inter',sans-serif;background:#fff;color:#222;overflow-x:hidden}
+.header{background:#FFF5EB;display:flex;justify-content:space-between;align-items:center;padding:14px 20px;position:sticky;top:0;z-index:1000}
+.logo{font-family:'Poppins',sans-serif;font-weight:800;font-size:26px;color:#FF8A2E;letter-spacing:-0.5px}
+.menu{width:32px;height:20px;display:flex;flex-direction:column;justify-content:space-between;cursor:pointer}
+.menu span{height:3px;background:#FF8A2E;border-radius:10px;display:block;transition:0.3s}
+.nav-menu{display:none;position:fixed;top:62px;right:12px;background:white;border-radius:14px;box-shadow:0 12px 28px rgba(0,0,0,0.15);padding:8px;z-index:2000;min-width:190px;border:1px solid #FFE6CC}
+.nav-menu a{display:block;padding:12px 16px;text-decoration:none;color:#333;font-size:14px;font-weight:600;border-radius:10px}
+.nav-menu a:hover{background:#FFF5EB;color:#FF8A2E}
+.hero{position:relative;width:100%;height:86vh;min-height:520px;background:#FFF5EB}
+.hero img{width:100%;height:100%;object-fit:cover;object-position:center top;display:block}
+.glass{position:absolute;left:14px;right:14px;bottom:20px;background:rgba(255,255,255,0.88);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-radius:18px;padding:20px 18px;border:1px solid rgba(255,255,255,0.8);box-shadow:0 8px 24px rgba(0,0,0,0.08)}
+.glass h1{font-family:'Poppins',sans-serif;font-weight:800;font-size:26px;line-height:1.15;color:#121212}
+.glass h1 span{color:#FF8A2E}
+.glass p{margin-top:8px;font-size:13.5px;color:#555;line-height:1.4}
+.btns{margin-top:16px;display:flex;gap:10px;flex-wrap:wrap}
+.btn{border-radius:999px;padding:12px 24px;font-weight:700;font-size:14px;border:none;cursor:pointer;text-decoration:none;display:inline-block;text-align:center;transition:0.2s}
+.btn:active{transform:scale(0.97)}
+.fill{background:#FF9A45;color:#fff;box-shadow:0 4px 12px rgba(255,154,69,0.3)}
+.fill:hover{background:#FF8A2E}
+.outline{background:#FFF5EB;color:#FF8A2E;border:1.8px solid #FF9A45}
+.outline:hover{background:#FF8A2E;color:#fff}
+.bar{background:#FFC49A;height:46px;width:100%}
+.section{padding:50px 18px}
+.title{font-family:'Poppins',sans-serif;font-size:28px;font-weight:800;text-align:center;margin-bottom:18px;color:#121212}
+.title span{color:#FF8A2E}
+.card{background:white;border-radius:18px;padding:20px;box-shadow:0 6px 20px rgba(255,138,46,0.08);border:1px solid #FFDDC0;max-width:720px;margin:0 auto;line-height:1.6;font-size:14.5px}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:12px;margin-top:18px}
+.stat{background:#FFFBF7;border:1px solid #FFDDC0;border-radius:14px;padding:16px;text-align:center}
+.stat b{font-family:'Poppins';font-size:22px;color:#FF8A2E;display:block}
+.contact{background:#FF9A45;color:white;padding:50px 18px;text-align:center}
+.contact h2{font-family:'Poppins';font-size:26px;margin-bottom:8px}
+.contact p{opacity:0.95}
+.contact .btn-white{background:white;color:#FF8A2E;border:none;padding:12px 32px;border-radius:999px;font-weight:800;margin-top:16px;cursor:pointer}
+@media(min-width:768px){.glass{left:40px;right:40px;max-width:560px}.glass h1{font-size:34px}.header{padding:16px 36px}.section{padding:60px 36px}}
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div class="logo">TrackLearn</div>
+  <div class="menu" id="menuBtn"><span></span><span></span><span></span></div>
+</div>
+<div class="nav-menu" id="navMenu">
   <a href="#home">🏠 Home</a>
   <a href="#overview">📚 Overview</a>
   <a href="#background">📖 Background</a>
+  <a href="#courses">💻 Courses</a>
   <a href="login.html">🔑 Login</a>
   <a href="dashboard.html">📊 Dashboard</a>
   <a href="#contact">📞 Contact Us</a>
 </div>
 
-<div class="hero" id="home"><img src="hero.jpg.jpeg"><div class="glass"><h1>Empower Your Growth,<br><span>Connect with Experts</span></h1><p>Track 8 IT Courses, 8 Students, 4 Facilitators</p><div class="btns"><a href="login.html" class="btn fill">Sign up now</a><a href="#overview" class="btn outline">Explore</a></div></div></div><div class="bar"></div>
+<div class="hero" id="home">
+  <img src="hero.jpg.jpeg" alt="TrackLearn Team - 11 Learners">
+  <div class="glass">
+    <h1>Empower Your Growth,<br><span>Connect with Experts</span></h1>
+    <p>Track 8 IT Courses, 8 Students, 4 Facilitators — Real-time tracking for South Africa.</p>
+    <div class="btns">
+      <a href="login.html" onclick="if(!this.href.includes('login')){event.preventDefault();document.getElementById('overview').scrollIntoView()}" class="btn fill">Sign up now</a>
+      <a href="#overview" class="btn outline">Explore</a>
+    </div>
+  </div>
+</div>
+<div class="bar"></div>
 
-<div class="section" id="overview"><h2 class="title">Overview</h2><div class="card"><b>TrackLearn LMS</b><br>8 IT Courses | 8 Students | 4 Workers<br><br>Web Dev 45, Data Science 38, Cybersecurity 32, Cloud 28, AI 22, Software Eng 40, Network 25, DB 30<br><br><a href="dashboard.html" class="btn fill">Go to Dashboard →</a> <a href="#background" class="btn outline">Background ↓</a></div></div>
+<div class="section" id="overview">
+  <h2 class="title">Project <span>Overview</span></h2>
+  <div class="card">
+    <b>TrackLearn LMS — Light Orange Suthraya Design</b><br><br>
+    We are tracking <b>8 IT Courses, 8 Students, 4 Facilitators</b> in real-time.<br><br>
+    <div class="grid">
+      <div class="stat"><b>8</b>Courses</div>
+      <div class="stat"><b>8</b>Students</div>
+      <div class="stat"><b>4</b>Facilitators</div>
+      <div class="stat"><b>100%</b>Our Team</div>
+    </div>
+    <br>
+    <a href="#courses" class="btn fill">View Courses ↓</a>
+    <a href="#background" class="btn outline">Background ↓</a>
+  </div>
+</div>
 
-<div class="section" id="background" style="background:#FFFBF7"><h2 class="title">Background</h2><div class="card"><b>Why TrackLearn?</b><br>SA skills gap, 30-40% dropout.<br><b>Solution:</b> Track progress, auto email when behind. Light orange theme, your team photo.<br><br><a href="login.html" class="btn fill">Login →</a> <a href="#contact" class="btn outline">Contact Us ↓</a></div></div>
+<div class="section" id="courses" style="background:#FFFBF7">
+  <h2 class="title">Our <span>8 Courses</span></h2>
+  <div class="card">
+    <div class="grid">
+      <div class="stat"><b>45</b>Web Dev</div>
+      <div class="stat"><b>38</b>Data Science</div>
+      <div class="stat"><b>32</b>Cybersecurity</div>
+      <div class="stat"><b>28</b>Cloud</div>
+      <div class="stat"><b>22</b>AI</div>
+      <div class="stat"><b>40</b>Software Eng</div>
+      <div class="stat"><b>25</b>Networking</div>
+      <div class="stat"><b>30</b>Database</div>
+    </div>
+    <br><center><a href="dashboard.html" class="btn fill">Go to Dashboard →</a></center>
+  </div>
+</div>
 
-<div class="contact" id="contact"><h2>Contact Us</h2><p>support@tracklearn.co.za</p><button onclick="window.location.href='mailto:support@tracklearn.co.za'">Contact Us</button><p style="margin-top:12px"><a href="login.html" style="color:white;text-decoration:underline">Go to Login</a></p></div>
+<div class="section" id="background">
+  <h2 class="title">Project <span>Background</span></h2>
+  <div class="card">
+    <b>Why TrackLearn?</b><br>
+    South Africa faces a digital skills gap. IT courses have 30-40% dropout because students fall behind silently.<br><br>
+    <b>Our Solution:</b><br>
+    • Real-time progress tracking<br>
+    • Auto email when student is behind<br>
+    • Facilitator dashboard<br>
+    • Uses YOUR team photo — authentic SA talent<br><br>
+    <a href="#contact" class="btn fill">Contact Us ↓</a>
+  </div>
+</div>
+
+<div class="contact" id="contact">
+  <h2>Contact Us</h2>
+  <p>We are the team in the photo — TrackLearn, Johannesburg</p>
+  <p style="margin-top:6px;font-size:13px">support@tracklearn.co.za | +27 11 123 4567</p>
+  <button class="btn-white" onclick="window.location.href='mailto:support@tracklearn.co.za'">Send Email</button>
+  <div style="margin-top:18px">
+    <a href="login.html" style="color:white;text-decoration:underline;font-size:13px;margin:0 8px">Login</a>
+    <a href="#home" style="color:white;text-decoration:underline;font-size:13px;margin:0 8px">Back to Top ↑</a>
+  </div>
+  <p style="margin-top:20px;font-size:11px;opacity:0.8">© 2026 TrackLearn — Light Orange Edition • Our Team Photo</p>
+</div>
 
 <script>
-// Close menu when clicking outside
-document.addEventListener('click', function(e){ if(!e.target.closest('.menu') && !e.target.closest('.nav-menu')){ document.getElementById('nav').style.display='none'; }});
+const menuBtn = document.getElementById('menuBtn');
+const navMenu = document.getElementById('navMenu');
+menuBtn.addEventListener('click', (e)=>{
+  e.stopPropagation();
+  navMenu.style.display = navMenu.style.display==='block'?'none':'block';
+});
+document.addEventListener('click', ()=>{
+  navMenu.style.display='none';
+});
+document.querySelectorAll('.nav-menu a').forEach(a=>{
+  a.addEventListener('click', ()=>{ navMenu.style.display='none'; });
+});
 </script>
-</body></html>
+
+</body>
+</html>
