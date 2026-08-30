@@ -2,117 +2,54 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<title>TrackLearn LMS - IT Courses with Overview & Background</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TrackLearn</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@700;800&family=Inter:wght@400;500&display=swap" rel="stylesheet">
 <style>
-*{margin:0;padding:0;box-sizing:border-box;font-family:Inter,Arial,sans-serif}
-body{background:#fff}
-.top{padding:12px 18px;border-bottom:1px solid #E5E7EB;display:flex;justify-content:space-between;align-items:center;background:#fff;position:sticky;top:0;z-index:10}
-.flex{display:flex}
-.side{width:220px;border-right:1px solid #E5E7EB;padding:10px;height:calc(100vh - 50px);background:#fff;overflow:auto}
-.side div{padding:10px 12px;border-radius:8px;margin-bottom:4px;cursor:pointer;font-size:14px;color:#4B5563}
-.side .active{background:#FFEDD5;color:#EA580C;font-weight:700}
-.main{flex:1;padding:18px;background:#F9FAFB;height:calc(100vh - 50px);overflow:auto}
-.card{background:#fff;border:1px solid #E5E7EB;border-radius:12px;padding:16px;margin-bottom:12px}
-.grid4{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:16px}
-.grid2{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:16px}
-.stat{background:#fff;border:1px solid #E5E7EB;border-radius:12px;padding:14px}
-button{background:#EA580C;color:#fff;border:none;padding:8px 14px;border-radius:8px;cursor:pointer;font-weight:600;font-size:13px;margin:2px}
-button.secondary{background:#fff;color:#111827;border:1px solid #E5E7EB}
-table{width:100%;border-collapse:collapse;font-size:13px}
-th{padding:10px;text-align:left;border-bottom:1px solid #E5E7EB;color:#6B7280;background:#F9FAFB}
-td{padding:10px;border-bottom:1px solid #F3F4F6}
-.badge{padding:4px 8px;border-radius:20px;font-size:11px;font-weight:700}
-.behind{background:#FEE2E2;color:#DC2626}
-.ontrack{background:#D1FAE5;color:#059669}
-.atrisk{background:#FEF3C7;color:#D97706}
-.search, select, input[type=text]{width:100%;padding:10px;border:1px solid #E5E7EB;border-radius:8px;margin-bottom:10px}
-select{cursor:pointer;background:#fff}
-.checkboxGroup{display:flex;flex-wrap:wrap;gap:10px;margin:10px 0}
-.checkboxGroup label{display:flex;align-items:center;gap:6px;font-size:13px;background:#F9FAFB;padding:6px 10px;border-radius:20px;border:1px solid #E5E7EB;cursor:pointer}
-.ok{margin-top:8px;padding:8px;background:#ECFDF5;border:1px solid #10B981;border-radius:6px;font-size:12px;display:none}
-.ok.show{display:block}
-#popup{position:fixed;inset:0;background:rgba(0,0,0,.4);display:none;align-items:center;justify-content:center;z-index:9999}
-#popup.show{display:flex}
-#login{position:fixed;inset:0;background:#fff;z-index:10000;display:flex;align-items:center;justify-content:center}
-.popupBox{background:#fff;padding:22px;border-radius:16px;width:360px;text-align:center;box-shadow:0 20px 50px rgba(0,0,0,.3)}
-.courseGrid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
-.hero{background:linear-gradient(135deg,#FFEDD5 0%,#FFF 100%);border:1px solid #FED7AA;border-radius:12px;padding:20px;margin-bottom:16px}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Inter',sans-serif;background:#fff;overflow-x:hidden}
+.header{background:#EDE7FF;display:flex;justify-content:space-between;align-items:center;padding:16px 20px;position:sticky;top:0;z-index:100}
+.logo{font-family:'Poppins',sans-serif;font-weight:800;font-size:28px;color:#7C5CBF;letter-spacing:-0.5px}
+.menu{width:32px;height:22px;display:flex;flex-direction:column;justify-content:space-between;cursor:pointer}
+.menu span{display:block;height:3px;background:#7C5CBF;border-radius:10px}
+.hero{position:relative;width:100%;height:82vh;background:#fff}
+.hero img{width:100%;height:100%;object-fit:cover;object-position:center top}
+.card{
+ position:absolute;left:16px;right:16px;bottom:24px;
+ background:rgba(232,232,232,0.78);
+ backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
+ border-radius:20px;padding:20px 16px 22px;text-align:center;
+ box-shadow:0 12px 40px rgba(0,0,0,0.18)
+}
+.card h1{font-family:'Poppins';font-weight:800;font-size:29px;line-height:1.18;color:#111827}
+.card h1 .purple{color:#6C4DB3}
+.card p{margin-top:10px;font-size:14.5px;line-height:1.55;color:#4B5563}
+.btns{margin-top:18px;display:flex;gap:12px;justify-content:center}
+.btn{border-radius:999px;padding:13px 26px;font-weight:600;font-size:15px;border:none;cursor:pointer}
+.btn-fill{background:#7C5CBF;color:#fff}
+.btn-outline{background:#EFEBFF;color:#5B45A0;border:1.8px solid #7C5CBF}
+.bar{background:#5D3EA8;height:56px;width:100%}
 </style>
 </head>
 <body>
-
-<div id="login"><div style="border:1px solid #E5E7EB;padding:24px;border-radius:16px;width:380px;text-align:center"><div style="color:#EA580C;font-weight:800;font-size:20px">📖 TrackLearn LMS</div><p style="font-size:12px;color:#6B7280;margin:8px 0">8 IT Courses | Overview & Background Included</p>
-<label style="font-size:12px;text-align:left;display:block;margin-bottom:4px">Student (Dropdown)</label>
-<select id="n"><option value="">-- Choose Student --</option><option>Banele Nkosi</option><option>Siviwe Dlamini</option><option>Anthea Mathekga</option><option>John Smith</option><option>Lerato Molefe</option><option>David Lee</option><option>Priya Patel</option><option>Kagiso Rabada</option></select>
-<label style="font-size:12px;text-align:left;display:block;margin:8px 0 4px">Role (Dropdown)</label>
-<select id="r"><option value="learner">Learner</option><option value="admin">Admin</option><option value="instructor">Worker</option></select>
-<label style="font-size:12px;text-align:left;display:block;margin:8px 0 4px">IT Course (Dropdown)</label>
-<select id="courseSelect"><option>Web Development</option><option>Data Science</option><option>Cybersecurity</option><option>Cloud Computing</option><option>Artificial Intelligence</option><option>Software Engineering</option><option>Network Administration</option><option>Database Management</option></select>
-<div style="text-align:left;margin-top:10px"><label style="font-size:12px">Modules (Checkbox)</label><div class="checkboxGroup"><label><input type="checkbox" checked> Videos</label><label><input type="checkbox" checked> Quizzes</label><label><input type="checkbox"> Assignments</label><label><input type="checkbox"> Projects</label></div></div>
-<button style="width:100%;margin-top:12px;padding:10px" onclick="LOGIN()">Login</button>
-</div></div>
-
-<div class="top"><b>📖 TrackLearn LMS - IT Learning Platform</b><span id="who" style="font-size:13px;color:#6B7280"></span></div>
-
-<div class="flex">
-<div class="side">
-<div id="s0" class="active" onclick="OVERVIEW()">📋 Overview</div>
-<div id="s00" onclick="BACKGROUND()">🌍 Background</div>
-<div id="s1" onclick="DASH()">🏠 Dashboard</div>
-<div id="s2" onclick="STUD()">👥 Students (8)</div>
-<div id="s3" onclick="COUR()">💻 IT Courses (8)</div>
-<div id="s4" onclick="WORK()">👷 Workers (4)</div>
-<div id="s5" onclick="ANAL()">📊 Analytics</div>
-<div id="s6" onclick="ENROLL()">📝 Enroll</div>
-<div id="s7" onclick="SETT()">⚙️ Settings</div>
-<div onclick="location.reload()">🚪 Logout</div>
-</div>
-<div class="main" id="M"></div>
+<div class="header">
+  <div class="logo">TrackLearn</div>
+  <div class="menu"><span></span><span></span><span></span></div>
 </div>
 
-<div id="popup"><div class="popupBox" id="popupBox"></div></div>
+<div class="hero">
+  <!-- REPLACE src with your Suthraya hero image -->
+  <img src="https://images.unsplash.com/photo-1523240795612-9a054b0db644?auto=format&fit=crop&w=900&q=80" alt="students">
+  <div class="card">
+    <h1>Empower Your Growth,<br><span class="purple">Connect with Experts</span></h1>
+    <p>Discover insights from professionals and scale your potential. Explore opportunities with a growing community of experts.</p>
+    <div class="btns">
+      <button class="btn btn-fill" onclick="alert('Sign up - TrackLearn LMS')">Sign up now</button>
+      <button class="btn btn-outline">Explore</button>
+    </div>
+  </div>
+</div>
 
-<script>
-const students=[
-{name:'Banele Nkosi',email:'banele@test.com',course:'Web Development',progress:30,status:'behind'},
-{name:'Siviwe Dlamini',email:'siviwe@test.com',course:'Data Science',progress:85,status:'ontrack'},
-{name:'Anthea Mathekga',email:'anthea@test.com',course:'Cybersecurity',progress:76,status:'ontrack'},
-{name:'John Smith',email:'john@test.com',course:'Cloud Computing',progress:92,status:'ontrack'},
-{name:'Lerato Molefe',email:'lerato@test.com',course:'Artificial Intelligence',progress:28,status:'behind'},
-{name:'David Lee',email:'david@test.com',course:'Software Engineering',progress:88,status:'ontrack'},
-{name:'Priya Patel',email:'priya@test.com',course:'Network Administration',progress:95,status:'ontrack'},
-{name:'Kagiso Rabada',email:'kagiso@test.com',course:'Database Management',progress:22,status:'behind'}
-];
-const courses=[
-{title:'Web Development',code:'IT101',students:45,duration:'12 Weeks',level:'Beginner',instructor:'Dr. James Wilson',desc:'Learn HTML, CSS, JavaScript, React, Node.js to build modern websites.'},
-{title:'Data Science',code:'IT102',students:38,duration:'16 Weeks',level:'Intermediate',instructor:'Prof. Sarah Chen',desc:'Python, Statistics, Machine Learning and Data Visualization.'},
-{title:'Cybersecurity',code:'IT103',students:32,duration:'14 Weeks',level:'Advanced',instructor:'Anthea Mathekga',desc:'Network security, ethical hacking, cryptography and risk management.'},
-{title:'Cloud Computing',code:'IT104',students:28,duration:'10 Weeks',level:'Intermediate',instructor:'John Smith',desc:'AWS, Azure, Docker, Kubernetes for cloud infrastructure.'},
-{title:'Artificial Intelligence',code:'IT105',students:22,duration:'20 Weeks',level:'Advanced',instructor:'Dr. James Wilson',desc:'AI basics, neural networks, deep learning and NLP.'},
-{title:'Software Engineering',code:'IT106',students:40,duration:'18 Weeks',level:'Intermediate',instructor:'David Lee',desc:'SDLC, Agile, Testing, DevOps and best practices.'},
-{title:'Network Administration',code:'IT107',students:25,duration:'12 Weeks',level:'Beginner',instructor:'Priya Patel',desc:'Networking fundamentals, TCP/IP, routers and security.'},
-{title:'Database Management',code:'IT108',students:30,duration:'10 Weeks',level:'Beginner',instructor:'Lerato Molefe',desc:'SQL, MySQL, MongoDB and database optimization.'}
-];
-const workers=[
-{name:'Dr. James Wilson',role:'IT Lead Instructor',expertise:'Web, AI',courses:2},
-{name:'Prof. Sarah Chen',role:'Data Science Instructor',expertise:'Python, ML',courses:1},
-{name:'Anthea Mathekga',role:'Cybersecurity Expert',expertise:'Security',courses:1},
-{name:'David Lee',role:'Software Engineer',expertise:'DevOps',courses:1}
-];
-function CLR(){document.querySelectorAll('.side div').forEach(e=>e.classList.remove('active'))}
-function closePop(){document.getElementById('popup').classList.remove('show');}
-function LOGIN(){let name=document.getElementById('n').value.trim();let role=document.getElementById('r').value;if(!name)return alert('Select student from dropdown');document.getElementById('login').style.display='none';document.getElementById('who').innerText=name+' ('+role+')';let me=students.find(s=>s.name===name);if(role==='learner'&&me&&me.status==='behind'){document.getElementById('popupBox').innerHTML=`<div style="width:50px;height:50px;background:#FEE2E2;border-radius:50%;margin:0 auto 12px;display:flex;align-items:center;justify-content:center;font-size:26px">⚠️</div><h3>You're Falling Behind</h3><p style="font-size:13px;color:#6B7280;margin:12px 0">Hi <b>${me.name}</b><br><b style="color:#DC2626">${me.progress}% behind</b> in ${me.course}<br>Facilitator notified for follow up.</p><button style="width:100%;padding:10px;background:#DC2626" onclick="closePop()">Continue Learning →</button>`;document.getElementById('popup').classList.add('show');}OVERVIEW();}
-function OVERVIEW(){CLR();document.getElementById('s0').classList.add('active');document.getElementById('M').innerHTML=`<div class="hero"><h2>📋 Overview - TrackLearn LMS</h2><p style="font-size:14px;color:#6B7280;margin-top:8px">A modern Learning Management System designed for IT education with real-time progress tracking and facilitator follow-up.</p></div><div class="grid2"><div class="card"><h4>🎯 Purpose</h4><p style="font-size:13px;color:#4B5563;margin-top:8px">TrackLearn LMS helps 8 students learn 8 different IT courses: Web Development, Data Science, Cybersecurity, Cloud Computing, Artificial Intelligence, Software Engineering, Network Administration, and Database Management.</p><br><small><b>Key Features:</b></small><br><small>• 8 IT Courses with dropdown selection</small><br><small>• 8 Students with individual progress tracking</small><br><small>• Warning popup when student is behind &lt;50%</small><br><small>• Direct LMS access when student is on track &gt;=50%</small><br><small>• Facilitator email reports for follow up</small><br><small>• Checkboxes for modules, notifications, availability</small><br><small>• Dropdowns for courses, students, roles, filters</small></div><div class="card"><h4>📊 Quick Stats</h4><div class="grid4" style="margin-top:12px"><div class="stat" style="padding:10px"><small>Courses</small><h3>8 IT</h3></div><div class="stat" style="padding:10px"><small>Students</small><h3>8</h3></div><div class="stat" style="padding:10px"><small>Workers</small><h3>4</h3></div><div class="stat" style="padding:10px"><small>Behind</small><h3 style="color:#DC2626">${students.filter(s=>s.status==='behind').length}</h3></div></div><br><small><b>IT Courses List:</b></small><br>${courses.map(c=>`<small>• ${c.code}: ${c.title} (${c.level})</small><br>`).join('')}<br><button onclick="BACKGROUND()">View Background →</button> <button class="secondary" onclick="DASH()">Go to Dashboard</button></div></div><div class="card"><h4>🔧 How It Works</h4><p style="font-size:13px;color:#4B5563;margin-top:8px">1. Student selects name from dropdown on login<br>2. System checks progress: Behind (&lt;50%) = Warning popup + email to facilitator for follow up<br>3. On Track (&gt;=50%) = Direct access to LMS, no warning<br>4. Admin/Workers see all 8 students, 8 courses, can send bulk reports to facilitator<br>5. Daily 6PM cron job sends summary of behind students to facilitator@tracklearn.com</p></div>`;}
-function BACKGROUND(){CLR();document.getElementById('s00').classList.add('active');document.getElementById('M').innerHTML=`<div class="hero"><h2>🌍 Background - Why TrackLearn LMS?</h2><p style="font-size:14px;color:#6B7280;margin-top:8px">Addressing the need for accessible IT education and proactive student support.</p></div><div class="grid2"><div class="card"><h4>📖 Project Background</h4><p style="font-size:13px;color:#4B5563;margin-top:8px">In South Africa and globally, many learners enroll in IT courses but fall behind without support. Traditional LMS platforms show content but don't alert facilitators when students stop learning.</p><br><p style="font-size:13px;color:#4B5563"><b>Problem:</b> 30-40% of online IT students drop out because no one follows up when they fall behind. Facilitators only discover issues during final exams.</p><br><p style="font-size:13px;color:#4B5563"><b>Solution:</b> TrackLearn LMS automatically detects when a student is not learning (progress &lt;50%, no recent activity) and:<br>• Shows warning popup on student login: "You're Falling Behind"<br>• Sends instant email report to facilitator: student name, course, progress, for follow up<br>• Provides dashboard with 8 IT courses, 8 students, analytics for facilitator to intervene early</p></div><div class="card"><h4>🎓 IT Education Context</h4><p style="font-size:13px;color:#4B5563;margin-top:8px">The 8 IT courses were chosen to cover most in-demand tech skills in 2026:</p><br><small><b>1. Web Development (IT101):</b> Foundation - HTML, CSS, JS, React</small><br><small><b>2. Data Science (IT102):</b> Data-driven careers - Python, ML</small><br><small><b>3. Cybersecurity (IT103):</b> Critical security skills shortage</small><br><small><b>4. Cloud Computing (IT104):</b> AWS/Azure - high demand</small><br><small><b>5. AI (IT105):</b> Future tech - Neural networks, NLP</small><br><small><b>6. Software Engineering (IT106):</b> Professional development practices</small><br><small><b>7. Network Admin (IT107):</b> Infrastructure basics</small><br><small><b>8. Database Mgmt (IT108):</b> Data storage core skill</small><br><br><div style="background:#F9FAFB;padding:10px;border-radius:8px;border:1px solid #E5E7EB"><small><b>Target Users:</b> People learning IT who need structured courses + facilitators who need to follow up on struggling students.</small></div><br><button onclick="OVERVIEW()">← Back to Overview</button> <button onclick="COUR()">View 8 IT Courses</button></div></div><div class="card"><h4>🛠️ Technology Stack & Design Choices</h4><div class="grid2"><div><small><b>Frontend:</b> Single index.html for GitHub Pages - no backend needed for demo, Supabase for production</small><br><small><b>Dropdowns:</b> Used for student selection, course selection, role, filters - better than typing for 8 items</small><br><small><b>Checkboxes:</b> Used for modules (Videos, Quizzes, Assignments, Projects), notifications, availability - multiple selection</small></div><div><small><b>Facilitator Workflow:</b> Email button → report to facilitator@tracklearn.com → facilitator follows up with student via email/call<br><b>Student Workflow:</b> Login → if behind → warning popup + auto email to facilitator → continue learning</small></div></div></div>`;}
-function DASH(){CLR();document.getElementById('s1').classList.add('active');document.getElementById('M').innerHTML=`<h2>Dashboard - 8 IT Courses</h2><p style="font-size:13px;color:#6B7280;margin:6px 0 12px">8 Students | 8 IT Courses | 4 Workers</p><div class="grid4"><div class="stat"><small>IT Courses</small><h2>8</h2></div><div class="stat"><small>Students</small><h2>8</h2></div><div class="stat"><small>Behind - Warning + Email</small><h2 style="color:#DC2626">${students.filter(s=>s.status==='behind').length}</h2></div><div class="stat"><small>On Track</small><h2 style="color:#059669">${students.filter(s=>s.status==='ontrack').length}</h2></div></div><div class="card"><b>System Overview</b><br><br>${courses.map(c=>`<small>• ${c.title} - ${c.students} learners - ${c.level}</small><br>`).join('')}<br><br><button onclick="OVERVIEW()">View Overview</button> <button onclick="BACKGROUND()">View Background</button> <button onclick="STUD()">View Students</button></div>`;}
-function STUD(){CLR();document.getElementById('s2').classList.add('active');let rows=students.map(s=>`<tr><td><b>${s.name}</b><br><small>${s.email}</small></td><td><select style="padding:4px;border-radius:6px"><option ${s.course==='Web Development'?'selected':''}>Web Development</option><option ${s.course==='Data Science'?'selected':''}>Data Science</option><option ${s.course==='Cybersecurity'?'selected':''}>Cybersecurity</option><option ${s.course==='Cloud Computing'?'selected':''}>Cloud Computing</option><option ${s.course==='Artificial Intelligence'?'selected':''}>Artificial Intelligence</option><option ${s.course==='Software Engineering'?'selected':''}>Software Engineering</option><option ${s.course==='Network Administration'?'selected':''}>Network Administration</option><option ${s.course==='Database Management'?'selected':''}>Database Management</option></select></td><td>${s.progress}%</td><td><span class="badge ${s.status}">${s.status}</span></td><td><label style="font-size:11px"><input type="checkbox" ${s.progress>50?'checked':''}> Email Report</label><br><label style="font-size:11px"><input type="checkbox" checked> Active</label></td><td><button onclick="this.nextElementSibling.classList.add('show')">📧 Email Facilitator</button><div class="ok">✓ Report sent to facilitator@tracklearn.com - ${s.name} - ${s.progress}% in ${s.course} - Follow up needed</div></td></tr>`).join('');document.getElementById('M').innerHTML=`<h2>Students - 8 Total</h2><div class="card" style="padding:0;overflow:hidden"><table><tr><th>Name</th><th>IT Course (Dropdown)</th><th>Progress</th><th>Status</th><th>Options (Checkbox)</th><th>Facilitator Report</th></tr>${rows}</table></div>`;}
-function COUR(){CLR();document.getElementById('s3').classList.add('active');document.getElementById('M').innerHTML=`<h2>8 Different IT Courses</h2><div class="courseGrid">${courses.map(c=>`<div class="card"><b>${c.title} (${c.code})</b> <span class="badge ontrack">${c.level}</span><br><small style="color:#6B7280">${c.instructor} | ${c.duration} | ${c.students} students</small><br><p style="font-size:12px;color:#4B5563;margin:8px 0">${c.desc}</p><div class="checkboxGroup"><label><input type="checkbox" checked> Videos</label><label><input type="checkbox" checked> Quizzes</label><label><input type="checkbox"> Assignments</label><label><input type="checkbox"> Projects</label></div><div style="display:flex;gap:6px"><select style="flex:1"><option>Enroll Student (Dropdown)</option>${students.map(s=>`<option>${s.name}</option>`).join('')}</select><button onclick="this.nextElementSibling.classList.add('show')">Enroll</button></div><div class="ok">✓ Student enrolled in ${c.title} - Facilitator notified</div></div>`).join('')}</div>`;}
-function WORK(){CLR();document.getElementById('s4').classList.add('active');document.getElementById('M').innerHTML=`<h2>Workers - 4 IT Experts</h2><div class="card" style="padding:0;overflow:hidden"><table><tr><th>Name</th><th>Role</th><th>Expertise</th><th>Courses</th><th>Options (Checkbox)</th></tr>${workers.map(w=>`<tr><td><b>${w.name}</b></td><td><select style="padding:4px;border-radius:6px"><option>${w.role}</option></select></td><td>${w.expertise}</td><td>${w.courses}</td><td><label><input type="checkbox" checked> Available</label> <label><input type="checkbox" checked> Email Notifications</label></td></tr>`).join('')}</table></div>`;}
-function ENROLL(){CLR();document.getElementById('s6').classList.add('active');document.getElementById('M').innerHTML=`<h2>Enroll - Dropdown + Checkbox</h2><div class="card"><label>Student (Dropdown)</label><select>${students.map(s=>`<option>${s.name}</option>`).join('')}</select><label>IT Course (Dropdown)</label><select>${courses.map(c=>`<option>${c.title} - ${c.code}</option>`).join('')}</select><label>Modules (Checkbox)</label><div class="checkboxGroup"><label><input type="checkbox" checked> Videos</label><label><input type="checkbox" checked> Quizzes</label><label><input type="checkbox"> Assignments</label><label><input type="checkbox"> Projects</label></div><label>Options (Checkbox)</label><div class="checkboxGroup"><label><input type="checkbox" checked> Send email to facilitator</label><label><input type="checkbox" checked> Active</label></div><button onclick="this.nextElementSibling.classList.add('show')">📝 Enroll + Email Facilitator</button><div class="ok">✓ Enrolled - Report sent to facilitator@tracklearn.com for follow up</div></div>`;}
-function ANAL(){CLR();document.getElementById('s5').classList.add('active');document.getElementById('M').innerHTML=`<h2>Analytics</h2><div class="card"><b>Follow Up - ${students.filter(s=>s.status==='behind').length} Students Need Follow Up</b><br><br>${students.filter(s=>s.status==='behind').map(s=>`• ${s.name} - ${s.progress}% in ${s.course}<br>`).join('')}<br><button onclick="this.nextElementSibling.classList.add('show')">📧 Send All Reports to Facilitator</button><div class="ok">✓ ${students.filter(s=>s.status==='behind').length} reports sent to facilitator@tracklearn.com</div></div>`;}
-function SETT(){CLR();document.getElementById('s7').classList.add('active');document.getElementById('M').innerHTML=`<h2>Settings</h2><div class="card"><label>Facilitator Email (Dropdown)</label><select><option>facilitator@tracklearn.com</option><option>admin@tracklearn.com</option></select><label>Notifications (Checkbox)</label><div class="checkboxGroup"><label><input type="checkbox" checked> Email facilitator on behind</label><label><input type="checkbox" checked> Daily 6PM summary</label></div><button onclick="this.nextElementSibling.classList.add('show')">Save</button><div class="ok">✓ Settings saved</div></div>`;}
-OVERVIEW();
-</script>
+<div class="bar"></div>
 </body>
 </html>
