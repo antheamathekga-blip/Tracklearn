@@ -1,55 +1,89 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>TrackLearn</title>
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@700;800&family=Inter:wght@400;500&display=swap" rel="stylesheet">
 <style>
-*{margin:0;padding:0;box-sizing:border-box}
-body{font-family:'Inter',sans-serif;background:#fff;overflow-x:hidden}
-.header{background:#EDE7FF;display:flex;justify-content:space-between;align-items:center;padding:16px 20px;position:sticky;top:0;z-index:100}
-.logo{font-family:'Poppins',sans-serif;font-weight:800;font-size:28px;color:#7C5CBF;letter-spacing:-0.5px}
-.menu{width:32px;height:22px;display:flex;flex-direction:column;justify-content:space-between;cursor:pointer}
-.menu span{display:block;height:3px;background:#7C5CBF;border-radius:10px}
-.hero{position:relative;width:100%;height:82vh;background:#fff}
+*{margin:0;padding:0;box-sizing:border-box;scroll-behavior:smooth}
+body{font-family:'Inter',sans-serif;background:#fff}
+.header{background:#FFF3E6;display:flex;justify-content:space-between;align-items:center;padding:16px 20px;position:sticky;top:0;z-index:100}
+.logo{font-family:'Poppins';font-weight:800;font-size:28px;color:#C45A0E}
+.menu{width:32px;height:22px;display:flex;flex-direction:column;justify-content:space-between}
+.menu span{height:3px;background:#C45A0E;border-radius:10px;display:block}
+.hero{position:relative;width:100%;height:88vh}
 .hero img{width:100%;height:100%;object-fit:cover;object-position:center top}
-.card{
+.glass{
  position:absolute;left:16px;right:16px;bottom:24px;
- background:rgba(232,232,232,0.78);
- backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
- border-radius:20px;padding:20px 16px 22px;text-align:center;
- box-shadow:0 12px 40px rgba(0,0,0,0.18)
+ background:rgba(232,232,232,0.82);backdrop-filter:blur(14px);
+ border-radius:20px;padding:20px 16px;text-align:center
 }
-.card h1{font-family:'Poppins';font-weight:800;font-size:29px;line-height:1.18;color:#111827}
-.card h1 .purple{color:#6C4DB3}
-.card p{margin-top:10px;font-size:14.5px;line-height:1.55;color:#4B5563}
+.glass h1{font-family:'Poppins';font-weight:800;font-size:28px;line-height:1.15;color:#111}
+.glass h1 span{color:#C45A0E}
+.glass p{margin-top:10px;font-size:14px;line-height:1.5;color:#4B5563}
 .btns{margin-top:18px;display:flex;gap:12px;justify-content:center}
-.btn{border-radius:999px;padding:13px 26px;font-weight:600;font-size:15px;border:none;cursor:pointer}
-.btn-fill{background:#7C5CBF;color:#fff}
-.btn-outline{background:#EFEBFF;color:#5B45A0;border:1.8px solid #7C5CBF}
-.bar{background:#5D3EA8;height:56px;width:100%}
+.btn{border-radius:999px;padding:12px 26px;font-weight:600;font-size:15px;border:none;cursor:pointer;text-decoration:none}
+.fill{background:#C45A0E;color:#fff}
+.outline{background:#FFF3E6;color:#8B3D00;border:1.8px solid #C45A0E}
+.orange-bar{background:#A64A0A;height:56px;width:100%}
+.section{padding:50px 20px}
+#overview{background:#fff}
+#background{background:#FFF8F0}
+.title{font-family:'Poppins';font-size:30px;font-weight:800;text-align:center;margin-bottom:20px;color:#111}
+.card-white{background:white;border-radius:20px;padding:20px;box-shadow:0 6px 20px rgba(196,90,14,0.08);border:1px solid #FFE6CC;max-width:800px;margin:0 auto}
+.contact{background:#A64A0A;color:white;padding:40px 20px;text-align:center}
+.contact button{background:white;color:#A64A0A;border:none;padding:12px 32px;border-radius:999px;font-weight:700;margin-top:16px}
 </style>
 </head>
 <body>
+
 <div class="header">
   <div class="logo">TrackLearn</div>
   <div class="menu"><span></span><span></span><span></span></div>
 </div>
 
 <div class="hero">
-  <!-- REPLACE src with your Suthraya hero image -->
-  <img src="https://images.unsplash.com/photo-1523240795612-9a054b0db644?auto=format&fit=crop&w=900&q=80" alt="students">
-  <div class="card">
-    <h1>Empower Your Growth,<br><span class="purple">Connect with Experts</span></h1>
-    <p>Discover insights from professionals and scale your potential. Explore opportunities with a growing community of experts.</p>
+  <img src="hero.jpg" alt="South African learners">
+  <div class="glass">
+    <h1>Empower Your Growth,<br><span>Connect with Experts</span></h1>
+    <p>Track 8 IT Courses, 8 Students, 4 Facilitators. Discover insights and scale your potential with TrackLearn LMS.</p>
     <div class="btns">
-      <button class="btn btn-fill" onclick="alert('Sign up - TrackLearn LMS')">Sign up now</button>
-      <button class="btn btn-outline">Explore</button>
+      <a href="#overview" class="btn fill">Sign up now</a>
+      <a href="#background" class="btn outline">Explore</a>
     </div>
   </div>
 </div>
+<div class="orange-bar"></div>
 
-<div class="bar"></div>
+<div class="section" id="overview">
+  <h2 class="title">Overview</h2>
+  <div class="card-white">
+    <p><b>TrackLearn LMS - IT Learning Platform</b><br><br>
+    8 IT Courses | 8 Students | 4 Workers<br><br>
+    Web Development (45 learners) - Beginner<br>
+    Data Science (38) - Intermediate<br>
+    Cybersecurity (32) - Advanced<br>
+    + 5 more IT courses...</p>
+    <br><a href="#background" class="btn fill">Go to Background ↓</a>
+  </div>
+</div>
+
+<div class="section" id="background">
+  <h2 class="title">Background</h2>
+  <div class="card-white">
+    <p><b>Why TrackLearn?</b><br><br>
+    South Africa digital skills gap. 30-40% dropout.<br><br>
+    <b>Solution:</b> Track progress, auto email when behind, Suthraya layout with orange theme.</p>
+    <br><a href="#contact" class="btn fill">Contact Us ↓</a>
+  </div>
+</div>
+
+<div class="contact" id="contact">
+  <h2>Contact Us</h2>
+  <p>support@tracklearn.co.za</p>
+  <button onclick="alert('Email sent!')">Contact Us</button>
+</div>
+
 </body>
 </html>
