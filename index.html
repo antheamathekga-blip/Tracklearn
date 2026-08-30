@@ -1,16 +1,35 @@
-<!DOCTYPE html><html><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>TrackLearn</title><link href="https://fonts.googleapis.com/css2?family=Poppins:wght@700;800&family=Inter:wght@400&display=swap" rel="stylesheet">
-<style>*{margin:0;padding:0;box-sizing:border-box;scroll-behavior:smooth}body{font-family:Inter,sans-serif;background:#fff}
+<!DOCTYPE html><html><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>TrackLearn</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@700;800&family=Inter:wght@400&display=swap" rel="stylesheet">
+<style>*{margin:0;padding:0;box-sizing:border-box;scroll-behavior:smooth}body{font-family:Inter,sans-serif}
 .header{background:#FFF5EB;display:flex;justify-content:space-between;align-items:center;padding:14px 18px;position:sticky;top:0;z-index:100}
-.logo{font-family:Poppins;font-weight:800;font-size:26px;color:#FF8A2E}.menu{width:30px;height:20px;display:flex;flex-direction:column;justify-content:space-between}.menu span{height:3px;background:#FF8A2E;border-radius:10px;display:block}
+.logo{font-family:Poppins;font-weight:800;font-size:26px;color:#FF8A2E}.menu{width:30px;height:20px;display:flex;flex-direction:column;justify-content:space-between;cursor:pointer}.menu span{height:3px;background:#FF8A2E;border-radius:10px;display:block}
 .hero{position:relative;width:100%;height:88vh}.hero img{width:100%;height:100%;object-fit:cover}
 .glass{position:absolute;left:12px;right:12px;bottom:18px;background:rgba(255,255,255,0.86);backdrop-filter:blur(12px);border-radius:18px;padding:18px 16px;border:1px solid #FFDDC0}
-.glass h1{font-family:Poppins;font-weight:800;font-size:24px;line-height:1.2}.glass h1 span{color:#FF8A2E}.glass p{margin-top:8px;font-size:13px;color:#555}.btns{margin-top:14px;display:flex;gap:10px}.btn{border-radius:999px;padding:11px 22px;font-weight:700;font-size:14px;border:none;cursor:pointer;text-decoration:none}.fill{background:#FF9A45;color:#fff}.outline{background:#FFF5EB;color:#FF8A2E;border:1.6px solid #FF9A45}.bar{background:#FFC49A;height:48px;width:100%}
+.glass h1{font-family:Poppins;font-weight:800;font-size:24px;line-height:1.2}.glass h1 span{color:#FF8A2E}.glass p{margin-top:8px;font-size:13px;color:#555}.btns{margin-top:14px;display:flex;gap:10px;flex-wrap:wrap}.btn{border-radius:999px;padding:11px 22px;font-weight:700;font-size:14px;border:none;cursor:pointer;text-decoration:none;display:inline-block}.fill{background:#FF9A45;color:#fff}.outline{background:#FFF5EB;color:#FF8A2E;border:1.6px solid #FF9A45}.bar{background:#FFC49A;height:48px;width:100%}
 .section{padding:40px 18px}.title{font-family:Poppins;font-size:26px;font-weight:800;text-align:center;margin-bottom:16px}.card{background:white;border-radius:16px;padding:16px;box-shadow:0 4px 16px rgba(255,138,46,0.08);border:1px solid #FFDDC0;max-width:700px;margin:0 auto;line-height:1.5;font-size:14px}
 .contact{background:#FF9A45;color:white;padding:36px 18px;text-align:center}.contact button{background:white;color:#FF8A2E;border:none;padding:12px 28px;border-radius:999px;font-weight:700;margin-top:12px}
+.nav-menu{display:none;position:fixed;top:60px;right:12px;background:white;border-radius:12px;box-shadow:0 8px 20px rgba(0,0,0,0.15);padding:12px;z-index:200}.nav-menu a{display:block;padding:10px 16px;text-decoration:none;color:#333;font-size:14px;border-radius:8px}.nav-menu a:hover{background:#FFF5EB;color:#FF8A2E}
 </style></head><body>
-<div class="header"><div class="logo">TrackLearn</div><div class="menu"><span></span><span></span><span></span></div></div>
-<div class="hero"><img src="hero.jpg.jpeg"><div class="glass"><h1>Empower Your Growth,<br><span>Connect with Experts</span></h1><p>Track 8 IT Courses, 8 Students, 4 Facilitators</p><div class="btns"><a href="#overview" class="btn fill">Sign up now</a><a href="#background" class="btn outline">Explore</a></div></div></div><div class="bar"></div>
-<div class="section" id="overview"><h2 class="title">Overview</h2><div class="card"><b>TrackLearn LMS</b><br>8 IT Courses | 8 Students | 4 Workers<br><br><a href="#background" class="btn fill">Go to Background ↓</a></div></div>
-<div class="section" id="background" style="background:#FFFBF7"><h2 class="title">Background</h2><div class="card"><b>Why TrackLearn?</b><br>SA skills gap, 30-40% dropout.<br><b>Solution:</b> Track progress, auto email when behind.<br><br><a href="#contact" class="btn fill">Contact Us ↓</a></div></div>
-<div class="contact" id="contact"><h2>Contact Us</h2><p>support@tracklearn.co.za</p><button onclick="alert('Email sent!')">Contact Us</button></div>
+<div class="header"><div class="logo">TrackLearn</div><div class="menu" onclick="document.getElementById('nav').style.display=document.getElementById('nav').style.display=='block'?'none':'block'"><span></span><span></span><span></span></div></div>
+<div class="nav-menu" id="nav">
+  <a href="#home">🏠 Home</a>
+  <a href="#overview">📚 Overview</a>
+  <a href="#background">📖 Background</a>
+  <a href="login.html">🔑 Login</a>
+  <a href="dashboard.html">📊 Dashboard</a>
+  <a href="#contact">📞 Contact Us</a>
+</div>
+
+<div class="hero" id="home"><img src="hero.jpg.jpeg"><div class="glass"><h1>Empower Your Growth,<br><span>Connect with Experts</span></h1><p>Track 8 IT Courses, 8 Students, 4 Facilitators</p><div class="btns"><a href="login.html" class="btn fill">Sign up now</a><a href="#overview" class="btn outline">Explore</a></div></div></div><div class="bar"></div>
+
+<div class="section" id="overview"><h2 class="title">Overview</h2><div class="card"><b>TrackLearn LMS</b><br>8 IT Courses | 8 Students | 4 Workers<br><br>Web Dev 45, Data Science 38, Cybersecurity 32, Cloud 28, AI 22, Software Eng 40, Network 25, DB 30<br><br><a href="dashboard.html" class="btn fill">Go to Dashboard →</a> <a href="#background" class="btn outline">Background ↓</a></div></div>
+
+<div class="section" id="background" style="background:#FFFBF7"><h2 class="title">Background</h2><div class="card"><b>Why TrackLearn?</b><br>SA skills gap, 30-40% dropout.<br><b>Solution:</b> Track progress, auto email when behind. Light orange theme, your team photo.<br><br><a href="login.html" class="btn fill">Login →</a> <a href="#contact" class="btn outline">Contact Us ↓</a></div></div>
+
+<div class="contact" id="contact"><h2>Contact Us</h2><p>support@tracklearn.co.za</p><button onclick="window.location.href='mailto:support@tracklearn.co.za'">Contact Us</button><p style="margin-top:12px"><a href="login.html" style="color:white;text-decoration:underline">Go to Login</a></p></div>
+
+<script>
+// Close menu when clicking outside
+document.addEventListener('click', function(e){ if(!e.target.closest('.menu') && !e.target.closest('.nav-menu')){ document.getElementById('nav').style.display='none'; }});
+</script>
 </body></html>
