@@ -1,27 +1,78 @@
-<div class="contact" id="contact" style="background:#FF9A45;color:white;padding:50px 18px;text-align:center">
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TrackLearn</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@700;800&family=Inter:wght@400;600&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;scroll-behavior:smooth}
+body{font-family:Inter,sans-serif;background:#fff}
+.header{background:#FFF5EB;display:flex;justify-content:space-between;align-items:center;padding:14px 20px;position:sticky;top:0;z-index:1000}
+.logo{font-family:Poppins;font-weight:800;font-size:26px;color:#FF8A2E}
+.menu{width:32px;height:20px;display:flex;flex-direction:column;justify-content:space-between;cursor:pointer}
+.menu span{height:3px;background:#FF8A2E;border-radius:10px;display:block}
+.nav-menu{display:none;position:fixed;top:62px;right:12px;background:white;border-radius:14px;box-shadow:0 12px 28px rgba(0,0,0,0.15);padding:8px;min-width:180px;border:1px solid #FFE6CC;z-index:2000}
+.nav-menu a{display:block;padding:12px 16px;text-decoration:none;color:#333;font-size:14px;font-weight:600;border-radius:10px}
+.nav-menu a:hover{background:#FFF5EB;color:#FF8A2E}
+.hero{position:relative;width:100%;height:86vh;min-height:520px}
+.hero img{width:100%;height:100%;object-fit:cover}
+.glass{position:absolute;left:14px;right:14px;bottom:20px;background:rgba(255,255,255,0.88);backdrop-filter:blur(14px);border-radius:18px;padding:20px 18px;box-shadow:0 8px 24px rgba(0,0,0,0.08)}
+.glass h1{font-family:Poppins;font-weight:800;font-size:26px;line-height:1.15}
+.glass h1 span{color:#FF8A2E}
+.glass p{margin-top:8px;font-size:13.5px;color:#555}
+.btns{margin-top:16px;display:flex;gap:10px;flex-wrap:wrap}
+.btn{border-radius:999px;padding:12px 24px;font-weight:700;font-size:14px;border:none;cursor:pointer;text-decoration:none;display:inline-block;text-align:center}
+.fill{background:#FF9A45;color:#fff}
+.outline{background:#FFF5EB;color:#FF8A2E;border:1.6px solid #FF9A45}
+.bar{background:#FFC49A;height:46px;width:100%}
+.section{padding:50px 18px}
+.title{font-family:Poppins;font-size:28px;font-weight:800;text-align:center;margin-bottom:18px}
+.title span{color:#FF8A2E}
+.card{background:white;border-radius:18px;padding:20px;box-shadow:0 6px 20px rgba(255,138,46,0.08);border:1px solid #FFDDC0;max-width:720px;margin:0 auto;line-height:1.6;font-size:14.5px}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;margin-top:18px}
+.stat{background:#FFFBF7;border:1px solid #FFDDC0;border-radius:14px;padding:16px;text-align:center}
+.stat b{font-family:Poppins;font-size:20px;color:#FF8A2E;display:block}
+.contact{background:#FF9A45;color:white;padding:50px 18px;text-align:center}
+</style>
+</head>
+<body>
+<div class="header"><div class="logo">TrackLearn</div><div class="menu" id="menuBtn"><span></span><span></span><span></span></div></div>
+<div class="nav-menu" id="navMenu"><a href="#home">Home</a><a href="#overview">Overview</a><a href="#programmes">Programmes</a><a href="#background">Background</a><a href="login.html">Login</a><a href="dashboard.html">Dashboard</a><a href="#contact">Contact</a></div>
+
+<div class="hero" id="home"><img src="hero.jpg.jpeg" alt="Team"><div class="glass"><h1>Empower Your Growth,<br><span>Connect with Experts</span></h1><p>Real-time learner tracking and support for IT programmes.</p><div class="btns"><a href="login.html" class="btn fill">Sign up now</a><a href="#overview" class="btn outline">Explore</a></div></div></div>
+<div class="bar"></div>
+
+<div class="section" id="overview"><h2 class="title">Project <span>Overview</span></h2><div class="card"><b>TrackLearn is a Learning Management System</b><br><br>Designed to help facilitators monitor student progress, identify learners who need support, and improve completion rates across IT programmes.<br><br><div class="grid"><div class="stat"><b>8</b>Programmes</div><div class="stat"><b>24/7</b>Access</div><div class="stat"><b>Real-time</b>Tracking</div><div class="stat"><b>Support</b>Focused</div></div></div></div>
+
+<div class="section" id="programmes" style="background:#FFFBF7"><h2 class="title">Our <span>Programmes</span></h2><div class="card"><div class="grid"><div class="stat"><b>Web Dev</b>Development</div><div class="stat"><b>Data Science</b>Analytics</div><div class="stat"><b>Cybersecurity</b>Security</div><div class="stat"><b>Cloud</b>Computing</div><div class="stat"><b>AI</b>Intelligence</div><div class="stat"><b>Software</b>Engineering</div><div class="stat"><b>Networking</b>Systems</div><div class="stat"><b>Database</b>Management</div></div><br><center><a href="dashboard.html" class="btn fill">Go to Dashboard</a></center></div></div>
+
+<div class="section" id="background"><h2 class="title">Project <span>Background</span></h2><div class="card"><b>The Challenge</b><br>Learners often fall behind without early support, leading to low completion rates.<br><br><b>Our Approach</b><br>Continuous progress monitoring, activity tracking, and facilitator alerts to ensure timely intervention.<br><br><b>Impact</b><br>Helping every learner succeed through targeted support.</div></div>
+
+<div class="contact" id="contact">
 <h2 style="font-family:Poppins;font-size:28px;margin-bottom:8px">Contact Us</h2>
 <p style="margin-bottom:20px;opacity:0.9">Reach our team directly</p>
-
 <div style="max-width:500px;margin:0 auto;background:rgba(255,255,255,0.15);border-radius:16px;padding:18px;margin-bottom:20px;text-align:left">
-<p style="margin-bottom:10px"><b>📞 Anthea Mathekga:</b><br><a href="tel:0762489604" style="color:white;text-decoration:none;font-weight:600">076 248 9604</a><br><a href="mailto:antheamathekga@gmail.com" style="color:white;text-decoration:none">antheamathekga@gmail.com</a></p>
-<p style="margin-bottom:10px"><b>📞 Banele Hlongwane:</b><br><a href="tel:0656048326" style="color:white;text-decoration:none;font-weight:600">065 604 8326</a></p>
-<p><b>📧 Cindy Ntsundeni:</b><br><a href="mailto:Cindyntsundenindashavhelafi@gmail.com" style="color:white;text-decoration:none">Cindyntsundenindashavhelafi@gmail.com</a></p>
+<p style="margin-bottom:10px"><b>Anthea Mathekga:</b><br><a href="tel:0762489604" style="color:white;text-decoration:none;font-weight:600">076 248 9604</a><br><a href="mailto:antheamathekga@gmail.com" style="color:white;text-decoration:none">antheamathekga@gmail.com</a></p>
+<p style="margin-bottom:10px"><b>Banele Hlongwane:</b><br><a href="tel:0656048326" style="color:white;text-decoration:none;font-weight:600">065 604 8326</a></p>
+<p><b>Cindy Ntsundeni:</b><br><a href="mailto:Cindyntsundenindashavhelafi@gmail.com" style="color:white;text-decoration:none">Cindyntsundenindashavhelafi@gmail.com</a></p>
 </div>
-
 <form action="https://formsubmit.co/antheamathekga@gmail.com" method="POST" style="max-width:400px;margin:0 auto;text-align:left">
 <input type="hidden" name="_subject" value="New TrackLearn Message">
 <input type="hidden" name="_captcha" value="false">
 <input type="hidden" name="_cc" value="Cindyntsundenindashavhelafi@gmail.com">
 <input type="email" name="email" placeholder="Your Email" required style="width:100%;padding:13px 16px;border-radius:12px;border:none;margin-bottom:10px;color:#333">
-<textarea name="message" placeholder="Your Message" required style="width:100%;padding:13px 16px;border-radius:12px;border:none;margin-bottom:12px;color:#333;min-height:80px;resize:none"></textarea>
+<textarea name="message" placeholder="Your Message" required style="width:100%;padding:13px 16px;border-radius:12px;border:none;margin-bottom:12px;color:#333;min-height:80px"></textarea>
 <button type="submit" style="width:100%;background:white;color:#FF8A2E;border:none;padding:13px;border-radius:12px;font-weight:800;cursor:pointer">Send Message</button>
 </form>
-
 <div style="margin-top:20px;display:flex;gap:10px;justify-content:center;flex-wrap:wrap">
-<a href="tel:0762489604" style="background:rgba(255,255,255,0.2);color:white;padding:10px 18px;border-radius:999px;text-decoration:none;font-weight:700;font-size:13px">📞 Call Anthea</a>
-<a href="tel:0656048326" style="background:rgba(255,255,255,0.2);color:white;padding:10px 18px;border-radius:999px;text-decoration:none;font-weight:700;font-size:13px">📞 Call Banele</a>
-<a href="https://wa.me/27762489604" style="background:#25D366;color:white;padding:10px 18px;border-radius:999px;text-decoration:none;font-weight:700;font-size:13px">💬 WhatsApp</a>
+<a href="tel:0762489604" style="background:rgba(255,255,255,0.2);color:white;padding:10px 18px;border-radius:999px;text-decoration:none;font-weight:700;font-size:13px">Call Anthea</a>
+<a href="tel:0656048326" style="background:rgba(255,255,255,0.2);color:white;padding:10px 18px;border-radius:999px;text-decoration:none;font-weight:700;font-size:13px">Call Banele</a>
+<a href="https://wa.me/27762489604" style="background:#25D366;color:white;padding:10px 18px;border-radius:999px;text-decoration:none;font-weight:700;font-size:13px">WhatsApp</a>
+</div>
+<p style="margin-top:20px;font-size:12px;opacity:0.8">© 2026 TrackLearn</p>
 </div>
 
-<p style="margin-top:20px;font-size:12px;opacity:0.8">© 2026 TrackLearn • All messages go to Anthea & Cindy</p>
-</div>
+<script>const b=document.getElementById('menuBtn'),m=document.getElementById('navMenu');b.onclick=e=>{e.stopPropagation();m.style.display=m.style.display==='block'?'none':'block'};document.addEventListener('click',()=>m.style.display='none')</script>
+</body>
+</html>
