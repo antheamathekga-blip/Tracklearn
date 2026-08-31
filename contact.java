@@ -17,11 +17,12 @@
 
     <div class="contact-person">
       <strong>Cindy Ntsundeni</strong><br>
-      ✉️ Cindyntsundenindashavhelafı@gmail.com
+      ✉️ Cindyntsundenindashavhelafi@gmail.com
     </div>
 
     <div class="contact-person">
       <strong>Phumelele Miya</strong><br>
+      📞 <span>076 787 5417</span><br>
       ✉️ Phumelelemmiya@gmail.com
     </div>
   </div>
